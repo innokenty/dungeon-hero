@@ -1,5 +1,8 @@
 package ru.innokenty.dungeonhero;
 
+import ru.innokenty.dungeonhero.controller.Command;
+import ru.innokenty.dungeonhero.controller.UnsupportedCommandException;
+
 import java.util.Scanner;
 
 public class ScannerCommandIterator implements CommandIterator {

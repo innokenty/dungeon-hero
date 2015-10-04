@@ -1,7 +1,9 @@
 package ru.innokenty.dungeonhero;
 
-import java.util.Objects;
-import java.util.function.Consumer;
+import ru.innokenty.dungeonhero.controller.Command;
+import ru.innokenty.dungeonhero.controller.Processor;
+import ru.innokenty.dungeonhero.controller.UnsupportedCommandException;
+import ru.innokenty.dungeonhero.view.Output;
 
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
@@ -12,15 +14,12 @@ public interface CommandIterator {
 
     Command next() throws UnsupportedCommandException;
 
-    default void forEachRemaining(Consumer<? super Command> action,
-                                  Consumer<? super UnsupportedCommandException> onException) {
-        Objects.requireNonNull(action);
-        Objects.requireNonNull(onException);
+    default void forEachRemaining(Processor processor, Output output) {
         while (hasNext()) {
             try {
-                action.accept(next());
+                output.output(processor.handle(next()));
             } catch (UnsupportedCommandException e) {
-                onException.accept(e);
+                output.outputException(e);
             }
         }
     }
