@@ -5,7 +5,7 @@ import ru.innokenty.dungeonhero.model.State;
 import ru.innokenty.dungeonhero.view.Output;
 import ru.innokenty.dungeonhero.view.console.ConsoleOutput;
 
-import java.util.Scanner;
+import java.io.InputStreamReader;
 
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
@@ -13,25 +13,27 @@ import java.util.Scanner;
 public class Main {
 
     private static RectangularMap map = new RectangularMap(new String[]{
-            " s                          ",
-            "       +----+               ",
-            "       |    |        1      ",
-            "       |    |               ",
-            "       |    +----+          ",
-            "       |  2      |   3      ",
-            "       |         |          ",
-            "       +---------+          ",
-            "                            ",
-            "       1         +          ",
-            "----+3+---------------------",
-            "    | |                     ",
-            "    | |                     ",
-            "    | |                     ",
-            "    |f|                     ",
+            "+--------------------------+",
+            "|s                         |",
+            "|      +----+              |",
+            "|      |    |        1     |",
+            "|      |    |              |",
+            "|      |    +----+         |",
+            "|      |  2      |   3     |",
+            "|      |         |         |",
+            "|      +---------+         |",
+            "|                          |",
+            "|      1         +         |",
+            "+---+ +--------------------+",
+            "|   |3|      +------+      |",
+            "|   | |      |8  9 f|      |",
+            "|   | +------+ +----+      |",
+            "|   | 6    7   |           |",
+            "+---+----------------------+",
     });
 
     public static void main(String[] args) {
-        CommandIterator commandIterator = new ScannerCommandIterator(new Scanner(System.in));
+        CommandIterator commandIterator = new ReaderCommandIterator(new InputStreamReader(System.in));
         Output output = new ConsoleOutput();
         State state = new State(map);
         new DungeonHero(state, commandIterator, output).start();

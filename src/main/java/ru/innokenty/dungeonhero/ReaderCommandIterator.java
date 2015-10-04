@@ -3,16 +3,17 @@ package ru.innokenty.dungeonhero;
 import ru.innokenty.dungeonhero.controller.Command;
 import ru.innokenty.dungeonhero.controller.UnsupportedCommandException;
 
-import java.util.Scanner;
+import java.io.IOException;
+import java.io.Reader;
 
-public class ScannerCommandIterator implements CommandIterator {
+public class ReaderCommandIterator implements CommandIterator {
 
-    private final Scanner input;
+    private final Reader reader;
 
     private boolean hasNext = true;
 
-    public ScannerCommandIterator(Scanner input) {
-        this.input = input;
+    public ReaderCommandIterator(Reader reader) {
+        this.reader = reader;
     }
 
     @Override
@@ -29,8 +30,12 @@ public class ScannerCommandIterator implements CommandIterator {
 
     @SuppressWarnings("StatementWithEmptyBody")
     public String nextLine() {
-        String line;
-        while ((line = input.nextLine().trim()).isEmpty());
-        return line;
+        String next;
+        try {
+            while ((next = String.valueOf((char) reader.read()).trim()).isEmpty());
+        } catch (IOException e) {
+            throw new DungeonHeroException("Unable to read input, closing", e);
+        }
+        return next;
     }
 }
