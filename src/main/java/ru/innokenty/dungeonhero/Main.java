@@ -14,7 +14,7 @@ public class Main {
 
     private static RectangularMap map = new RectangularMap(new String[]{
             "+--------------------------+",
-            "|s     1                   |",
+            "|s 1                       |",
             "|      +----+              |",
             "|      |....|        1     |",
             "|      |....|              |",
