@@ -12,6 +12,10 @@ public abstract class Cell {
         this.code = code;
     }
 
+    protected char getCode() {
+        return code;
+    }
+
     public boolean isAccessible() {
         return true;
     }

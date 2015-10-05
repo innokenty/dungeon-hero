@@ -8,6 +8,8 @@ public class State {
     private final Hero hero;
     private final ViewPoint viewPoint;
 
+    private Fight fight;
+
     public State(WorldMap map) {
         this.hero = new Hero();
         this.viewPoint = new ViewPoint(map, hero);
@@ -19,5 +21,17 @@ public class State {
 
     public ViewPoint getViewPoint() {
         return viewPoint;
+    }
+
+    public boolean isInFight() {
+        return fight != null;
+    }
+
+    public void startFightWith(Monster monster) {
+        this.fight = new Fight(hero, monster);
+    }
+
+    public Fight getFight() {
+        return fight;
     }
 }

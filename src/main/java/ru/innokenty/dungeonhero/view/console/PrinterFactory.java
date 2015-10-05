@@ -1,5 +1,6 @@
 package ru.innokenty.dungeonhero.view.console;
 
+import ru.innokenty.dungeonhero.model.Fight;
 import ru.innokenty.dungeonhero.model.Hero;
 import ru.innokenty.dungeonhero.model.ViewPoint;
 import ru.innokenty.dungeonhero.view.Help;
@@ -22,6 +23,7 @@ public class PrinterFactory {
         PRINTER_MAP.put(ViewPoint.class, ViewPointPrinter.getInstance());
         PRINTER_MAP.put(Message.class, MessagePrinter.getInstance());
         PRINTER_MAP.put(Help.class, HelpPrinter.getInstance());
+        PRINTER_MAP.put(Fight.class, FightPrinter.getInstance());
     }
 
     private PrinterFactory() {

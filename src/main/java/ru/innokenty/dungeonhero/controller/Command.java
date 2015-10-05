@@ -14,6 +14,7 @@ public enum Command {
     MOVE_DOWN('s', "down", "move character down if applicable"),
     MOVE_LEFT('a', "left", "move character left if applicable"),
     INFO('i', "info", "display character stats and info"),
+    FIGHT_INFO('f', "fight info", "display the current fight info"),
     SAVE('p', "save", "save the game to a file"),
     LOAD('o', "open", "open previously saved game from a file"),
     HELP('h', "help", "display this help"),

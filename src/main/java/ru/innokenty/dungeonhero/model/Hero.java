@@ -6,16 +6,24 @@ import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
 
+import static java.lang.Math.pow;
+import static java.lang.Math.round;
+import static java.lang.Math.sqrt;
+import static ru.innokenty.dungeonhero.model.Skill.AGILITY;
+import static ru.innokenty.dungeonhero.model.Skill.HEALTH;
+import static ru.innokenty.dungeonhero.model.Skill.STRENGTH;
 import static ru.innokenty.dungeonhero.model.Skill.VISION;
 
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
-public class Hero implements Printable, WithVision {
+public class Hero implements Printable, WithVision, Fighter {
 
     private final Map<Skill, Integer> skills = new EnumMap<>(Skill.class);
 
     private final Experience experience = new Experience();
+
+    private int health;
 
     {
         Arrays.asList(Skill.values()).stream().forEach(s -> skills.put(s, 1));
@@ -37,5 +45,38 @@ public class Hero implements Printable, WithVision {
     @Override
     public int getVision() {
         return get(VISION);
+    }
+
+    public void resetHealth() {
+        health = getHealthTotal();
+    }
+
+    @Override
+    public int getHealth() {
+        return health;
+    }
+
+    @Override
+    public int getHealthTotal() {
+        //complex formula that came from my mind and describes how I feel it should work
+        return (int) ((1 + get(HEALTH) * 2 + (double) get(STRENGTH) / 2 + (double) get(AGILITY) / 3) * 5);
+    }
+
+    //TODO ask for real name
+    @Override
+    public String getName() {
+        return "Player";
+    }
+
+    @Override
+    public int getMinDamage() {
+        //complex formula that came from my mind and describes how I feel it should work
+        return (int) round(sqrt(get(STRENGTH) * (1 + pow(get(AGILITY), 2))));
+    }
+
+    @Override
+    public int getMaxDamage() {
+        //complex formula that came from my mind and describes how I feel it should work
+        return (int) round(sqrt(pow(get(STRENGTH), 2) * (10 + pow(get(AGILITY), 2))));
     }
 }
