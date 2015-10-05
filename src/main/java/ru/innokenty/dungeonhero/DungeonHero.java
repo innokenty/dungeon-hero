@@ -2,8 +2,8 @@ package ru.innokenty.dungeonhero;
 
 import ru.innokenty.dungeonhero.controller.Processor;
 import ru.innokenty.dungeonhero.model.State;
+import ru.innokenty.dungeonhero.view.Help;
 import ru.innokenty.dungeonhero.view.Output;
-import ru.innokenty.dungeonhero.view.console.Help;
 
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru

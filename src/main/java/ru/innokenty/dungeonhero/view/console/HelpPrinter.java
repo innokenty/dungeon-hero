@@ -1,23 +1,30 @@
 package ru.innokenty.dungeonhero.view.console;
 
 import ru.innokenty.dungeonhero.controller.Command;
+import ru.innokenty.dungeonhero.view.Help;
 
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
-public class Help extends Message {
+public class HelpPrinter implements Printer<Help> {
 
-    private static final Help instance = new Help();
+    private static final String HELP_MESSAGE = buildHelpMessage();
 
-    public static Help getInstance() {
+    private static final HelpPrinter instance = new HelpPrinter();
+
+    public static HelpPrinter getInstance() {
         return instance;
     }
 
-    private Help() {
-        super(helpMessage());
+    private HelpPrinter() {
     }
 
-    private static String helpMessage() {
+    @Override
+    public String stringify(Help help) {
+        return HELP_MESSAGE;
+    }
+
+    private static String buildHelpMessage() {
         StringBuilder builder = new StringBuilder();
         builder.append("Type in one or multiple command codes and press enter.\n")
                .append("The following commands are available:\n\n");
@@ -27,4 +34,5 @@ public class Help extends Message {
                                           .append("\n"));
         return builder.toString();
     }
+
 }

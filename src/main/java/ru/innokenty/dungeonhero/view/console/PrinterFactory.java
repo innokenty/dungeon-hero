@@ -2,6 +2,8 @@ package ru.innokenty.dungeonhero.view.console;
 
 import ru.innokenty.dungeonhero.model.Hero;
 import ru.innokenty.dungeonhero.model.ViewPoint;
+import ru.innokenty.dungeonhero.view.Help;
+import ru.innokenty.dungeonhero.view.Message;
 import ru.innokenty.dungeonhero.view.Printable;
 
 import java.util.HashMap;
@@ -16,10 +18,10 @@ public class PrinterFactory {
     public static final Map<Class<? extends Printable>, Printer> PRINTER_MAP = new HashMap<>(2);
 
     static {
-        PRINTER_MAP.put(Hero.class, new HeroPrinter());
-        PRINTER_MAP.put(ViewPoint.class, new ViewPointPrinter());
-        PRINTER_MAP.put(Help.class, new Message());
-        PRINTER_MAP.put(Message.class, new Message());
+        PRINTER_MAP.put(Hero.class, HeroPrinter.getInstance());
+        PRINTER_MAP.put(ViewPoint.class, ViewPointPrinter.getInstance());
+        PRINTER_MAP.put(Message.class, MessagePrinter.getInstance());
+        PRINTER_MAP.put(Help.class, HelpPrinter.getInstance());
     }
 
     private PrinterFactory() {

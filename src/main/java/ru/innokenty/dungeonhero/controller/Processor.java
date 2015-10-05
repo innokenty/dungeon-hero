@@ -4,9 +4,9 @@ import ru.innokenty.dungeonhero.model.State;
 import ru.innokenty.dungeonhero.model.ViewPoint;
 import ru.innokenty.dungeonhero.model.cell.Cell;
 import ru.innokenty.dungeonhero.model.cell.FinishCell;
+import ru.innokenty.dungeonhero.view.Help;
+import ru.innokenty.dungeonhero.view.Message;
 import ru.innokenty.dungeonhero.view.Printable;
-import ru.innokenty.dungeonhero.view.console.Help;
-import ru.innokenty.dungeonhero.view.console.Message;
 
 import java.awt.Point;
 

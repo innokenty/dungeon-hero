@@ -9,6 +9,15 @@ import ru.innokenty.dungeonhero.model.Skill;
  */
 public class HeroPrinter implements Printer<Hero> {
 
+    private static final HeroPrinter instance = new HeroPrinter();
+
+    public static HeroPrinter getInstance() {
+        return instance;
+    }
+
+    private HeroPrinter() {
+    }
+
     public String stringify(Hero hero) {
         StringBuilder builder = new StringBuilder();
         builder.append("====SKILLS====\n");
