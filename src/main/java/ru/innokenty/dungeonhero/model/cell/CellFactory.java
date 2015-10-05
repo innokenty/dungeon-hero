@@ -22,6 +22,8 @@ public class CellFactory {
             return new WallCell(cellChar);
         } else if (cell.matches("\\d+")) {
             return new MonsterCell(cellChar);
+        } else if (cell.matches("\\.")) {
+            return new DarkCell();
         }
         throw new IllegalArgumentException("Character '" + cellChar + "' is not supported as a cell descriptor");
     }
