@@ -1,4 +1,4 @@
-package ru.innokenty.dungeonhero.model;
+package ru.innokenty.dungeonhero.model.cell;
 
 import ru.innokenty.dungeonhero.model.cell.Cell;
 
