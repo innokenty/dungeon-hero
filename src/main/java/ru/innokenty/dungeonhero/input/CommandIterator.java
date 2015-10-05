@@ -1,4 +1,4 @@
-package ru.innokenty.dungeonhero;
+package ru.innokenty.dungeonhero.input;
 
 import ru.innokenty.dungeonhero.controller.Command;
 import ru.innokenty.dungeonhero.controller.UnsupportedCommandException;

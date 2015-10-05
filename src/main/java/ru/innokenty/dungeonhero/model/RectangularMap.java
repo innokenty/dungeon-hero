@@ -1,8 +1,6 @@
 package ru.innokenty.dungeonhero.model;
 
 import ru.innokenty.dungeonhero.model.cell.Cell;
-import ru.innokenty.dungeonhero.model.cell.CellFactory;
-import ru.innokenty.dungeonhero.model.cell.StartingCell;
 
 import java.awt.Point;
 import java.util.Arrays;
@@ -16,27 +14,9 @@ public class RectangularMap implements WorldMap {
 
     private final Point startingPoint;
 
-    public RectangularMap(String[] mapData) {
-        cells = new Cell[mapData[0].length()][mapData.length];
-        Point startingPoint = null;
-
-        for (int i = 0; i < mapData.length; i++) {
-            String rowData = mapData[i];
-            for (int j = 0; j < rowData.toCharArray().length; j++) {
-                char cellData = rowData.toCharArray()[j];
-                Cell cell = CellFactory.parse(cellData);
-                cells[j][i] = cell;
-                if (cell instanceof StartingCell) {
-                    startingPoint = new Point(j, i);
-                }
-            }
-        }
-
-        if (startingPoint == null) {
-            throw new IllegalArgumentException("The map contains no starting point!");
-        } else {
-            this.startingPoint = startingPoint;
-        }
+    public RectangularMap(Cell[][] cells, Point startingPoint) {
+        this.cells = cells;
+        this.startingPoint = startingPoint;
     }
 
     @Override
