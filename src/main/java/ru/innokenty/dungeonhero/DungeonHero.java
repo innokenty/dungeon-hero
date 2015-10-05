@@ -1,9 +1,14 @@
 package ru.innokenty.dungeonhero;
 
+import ru.innokenty.dungeonhero.controller.Command;
 import ru.innokenty.dungeonhero.controller.Processor;
+import ru.innokenty.dungeonhero.controller.UnsupportedCommandException;
+import ru.innokenty.dungeonhero.input.CommandIterator;
 import ru.innokenty.dungeonhero.model.State;
-import ru.innokenty.dungeonhero.view.Help;
 import ru.innokenty.dungeonhero.view.Output;
+
+import static ru.innokenty.dungeonhero.controller.Command.HELP;
+import static ru.innokenty.dungeonhero.controller.Command.MAP;
 
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
@@ -21,7 +26,22 @@ public class DungeonHero {
     }
 
     public void start() {
-        output.output(Help.getInstance());
-        commandIterator.forEachRemaining(processor, output);
+        runCommand(HELP);
+        runCommand(MAP);
+
+        while (commandIterator.hasNext()) {
+            try {
+                runCommand(commandIterator.next());
+                if (processor.hasFinished()) {
+                    break;
+                }
+            } catch (UnsupportedCommandException e) {
+                output.outputException(e);
+            }
+        }
+    }
+
+    private void runCommand(Command command) {
+        processor.handle(command).stream().forEach(output::output);
     }
 }
