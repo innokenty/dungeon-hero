@@ -2,11 +2,15 @@ package ru.innokenty.dungeonhero.controller;
 
 import ru.innokenty.dungeonhero.model.State;
 import ru.innokenty.dungeonhero.model.ViewPoint;
+import ru.innokenty.dungeonhero.model.cell.Cell;
+import ru.innokenty.dungeonhero.model.cell.FinishCell;
 import ru.innokenty.dungeonhero.view.Printable;
 import ru.innokenty.dungeonhero.view.console.Help;
 import ru.innokenty.dungeonhero.view.console.Message;
 
 import java.awt.Point;
+
+import static java.lang.String.format;
 
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
@@ -15,8 +19,18 @@ public class Processor {
 
     private final State state;
 
+    private boolean finished;
+
     public Processor(State state) {
         this.state = state;
+    }
+
+    public void finish() {
+        finished = true;
+    }
+
+    public boolean hasFinished() {
+        return finished;
     }
 
     public Printable handle(Command command) {
@@ -25,8 +39,11 @@ public class Processor {
             case MOVE_RIGHT:
             case MOVE_DOWN:
             case MOVE_LEFT:
-                if (!move(state.getViewPoint(), command)) {
+                Cell cell = move(command);
+                if (cell == null) {
                     return new Message("Unable to move there, don't you see?!");
+                } else if (cell.isInteractable()) {
+                    return interact(cell);
                 }
             case MAP:
                 return state.getViewPoint();
@@ -41,13 +58,15 @@ public class Processor {
             case HELP:
                 return Help.getInstance();
             case QUIT:
+                finish();
                 return new Message("Thank you, my hero, and good bye!");
             default:
-                throw new IllegalArgumentException("Command '" + command + "' is not supported!");
+                throw new IllegalArgumentException(format("Command '%s' is not supported!", command));
         }
     }
 
-    public static boolean move(ViewPoint viewPoint, Command moveCommand) {
+    public Cell move(Command moveCommand) {
+        ViewPoint viewPoint = state.getViewPoint();
         Point dest = viewPoint.getLocation();
         switch (moveCommand) {
             case MOVE_UP:
@@ -62,15 +81,24 @@ public class Processor {
             case MOVE_LEFT:
                 dest.x--;
                 break;
-            default:
-                return false;
         }
 
         if (viewPoint.getMap().isAccessible(dest)) {
             viewPoint.setLocation(dest);
-            return true;
+            return viewPoint.getMap().getCell(dest);
         }
 
-        return false;
+        return null;
+    }
+
+    private Printable interact(Cell cell) {
+        if (cell instanceof FinishCell) {
+            finish();
+            return new Message("This is it! You've made it, my hero! Congrats, boy!");
+        }
+
+        throw new IllegalArgumentException(format(
+                "Interaction with cell of type %s is not yet implemented!",
+                cell.getClass().getSimpleName()));
     }
 }

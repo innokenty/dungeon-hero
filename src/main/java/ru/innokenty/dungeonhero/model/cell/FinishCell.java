@@ -8,4 +8,9 @@ public class FinishCell extends Cell {
     public FinishCell(char code) {
         super(code);
     }
+
+    @Override
+    public boolean isInteractable() {
+        return true;
+    }
 }

@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.function.Consumer;
 
 /**
+ * TODO transform to class hierarchy
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
 public enum Command {
@@ -38,5 +39,4 @@ public enum Command {
     public static void forEach(Consumer<Command> action) {
         Arrays.asList(values()).stream().forEach(action);
     }
-
 }

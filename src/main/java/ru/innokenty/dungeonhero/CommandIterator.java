@@ -18,6 +18,9 @@ public interface CommandIterator {
         while (hasNext()) {
             try {
                 output.output(processor.handle(next()));
+                if (processor.hasFinished()) {
+                    break;
+                }
             } catch (UnsupportedCommandException e) {
                 output.outputException(e);
             }

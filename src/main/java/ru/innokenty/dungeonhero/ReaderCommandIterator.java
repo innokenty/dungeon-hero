@@ -10,22 +10,18 @@ public class ReaderCommandIterator implements CommandIterator {
 
     private final Reader reader;
 
-    private boolean hasNext = true;
-
     public ReaderCommandIterator(Reader reader) {
         this.reader = reader;
     }
 
     @Override
     public boolean hasNext() {
-        return hasNext;
+        return true;
     }
 
     @Override
     public Command next() throws UnsupportedCommandException {
-        Command command = Command.parse(nextLine());
-        hasNext = command != Command.QUIT;
-        return command;
+        return Command.parse(nextLine());
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

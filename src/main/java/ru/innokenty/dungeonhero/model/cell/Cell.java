@@ -16,6 +16,10 @@ public abstract class Cell {
         return true;
     }
 
+    public boolean isInteractable() {
+        return false;
+    }
+
     @Override
     public String toString() {
         return String.valueOf(code);
