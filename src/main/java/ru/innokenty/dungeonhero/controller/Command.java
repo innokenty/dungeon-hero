@@ -13,9 +13,9 @@ public enum Command {
     MOVE_RIGHT('d', "right", "move character right if applicable"),
     MOVE_DOWN('s', "down", "move character down if applicable"),
     MOVE_LEFT('a', "left", "move character left if applicable"),
-    INFO('i', "info", "display charachter stats and info"),
+    INFO('i', "info", "display character stats and info"),
     SAVE('p', "save", "save the game to a file"),
-    LOAD('o', "open", "open previeously saved game from a file"),
+    LOAD('o', "open", "open previously saved game from a file"),
     HELP('h', "help", "display this help"),
     QUIT('q', "quit", "quit the game without saving");
 
