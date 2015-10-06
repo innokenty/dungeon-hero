@@ -1,13 +1,11 @@
 package ru.innokenty.dungeonhero.controller;
 
+import ru.innokenty.dungeonhero.model.Cell;
 import ru.innokenty.dungeonhero.model.Monster;
+import ru.innokenty.dungeonhero.model.MonsterCell;
 import ru.innokenty.dungeonhero.model.Punch;
 import ru.innokenty.dungeonhero.model.State;
 import ru.innokenty.dungeonhero.model.ViewPoint;
-import ru.innokenty.dungeonhero.model.cell.Cell;
-import ru.innokenty.dungeonhero.model.cell.EmptyCell;
-import ru.innokenty.dungeonhero.model.cell.FinishCell;
-import ru.innokenty.dungeonhero.model.cell.MonsterCell;
 import ru.innokenty.dungeonhero.view.Help;
 import ru.innokenty.dungeonhero.view.Message;
 import ru.innokenty.dungeonhero.view.Printable;
@@ -18,6 +16,7 @@ import java.util.List;
 
 import static java.lang.String.format;
 import static java.util.Collections.singletonList;
+import static ru.innokenty.dungeonhero.model.Cell.FINISH;
 
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
@@ -79,7 +78,7 @@ public class Processor {
 
                 if (fight.heroWins()) {
                     state.stopFight();
-                    state.getViewPoint().replaceCurrentCell(new EmptyCell(' '));
+                    state.getViewPoint().emptyCurrentCell();
                     //TODO gain experience
                     return Arrays.asList(
                             punch,
@@ -142,7 +141,7 @@ public class Processor {
     }
 
     private List<Printable> interact(Cell cell) {
-        if (cell instanceof FinishCell) {
+        if (cell == FINISH) {
             finish();
             return singletonList(new Message("This is it! You've made it, my hero! Congrats, boy!"));
         }

@@ -1,7 +1,5 @@
 package ru.innokenty.dungeonhero.model;
 
-import ru.innokenty.dungeonhero.model.cell.Cell;
-
 import java.awt.Point;
 
 /**

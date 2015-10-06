@@ -1,12 +1,14 @@
-package ru.innokenty.dungeonhero.model.cell;
+package ru.innokenty.dungeonhero.model;
 
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
 public class MonsterCell extends Cell {
 
+    private final int level;
+
     public MonsterCell(char code) {
-        super(code);
+        level = Integer.parseInt(String.valueOf(code));
     }
 
     @Override
@@ -15,6 +17,6 @@ public class MonsterCell extends Cell {
     }
 
     public int getLevel() {
-        return Integer.parseInt(String.valueOf(getCode()));
+        return level;
     }
 }

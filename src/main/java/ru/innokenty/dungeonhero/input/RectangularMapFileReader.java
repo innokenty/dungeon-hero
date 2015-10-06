@@ -1,17 +1,17 @@
 package ru.innokenty.dungeonhero.input;
 
 import ru.innokenty.dungeonhero.DungeonHeroException;
+import ru.innokenty.dungeonhero.model.Cell;
 import ru.innokenty.dungeonhero.model.RectangularMap;
 import ru.innokenty.dungeonhero.model.WorldMap;
-import ru.innokenty.dungeonhero.model.cell.Cell;
-import ru.innokenty.dungeonhero.model.cell.CellFactory;
-import ru.innokenty.dungeonhero.model.cell.StartingCell;
 
 import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import static ru.innokenty.dungeonhero.model.Cell.START;
 
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
@@ -45,7 +45,7 @@ public class RectangularMapFileReader {
                 char cellData = rowData.toCharArray()[j];
                 Cell cell = CellFactory.parse(cellData);
                 cells[j][i] = cell;
-                if (cell instanceof StartingCell) {
+                if (cell == START) {
                     startingPoint = new Point(j, i);
                 }
             }
