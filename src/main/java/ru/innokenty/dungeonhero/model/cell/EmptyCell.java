@@ -1,7 +1,5 @@
 package ru.innokenty.dungeonhero.model.cell;
 
-import ru.innokenty.dungeonhero.model.cell.Cell;
-
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */

@@ -2,6 +2,7 @@ package ru.innokenty.dungeonhero.model;
 
 import java.util.Random;
 
+import static java.lang.Math.max;
 import static java.lang.Math.pow;
 
 /**
@@ -21,7 +22,7 @@ public class Monster implements Fighter {
     };
 
     private final int healthTotal;
-    private final int health;
+    private int health;
     private final int minHitDamage;
     private final int maxHitDamage;
     private String name;
@@ -36,6 +37,11 @@ public class Monster implements Fighter {
     }
 
     @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
     public int getHealth() {
         return health;
     }
@@ -46,11 +52,6 @@ public class Monster implements Fighter {
     }
 
     @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
     public int getMinDamage() {
         return minHitDamage;
     }
@@ -58,5 +59,10 @@ public class Monster implements Fighter {
     @Override
     public int getMaxDamage() {
         return maxHitDamage;
+    }
+
+    @Override
+    public void damage(int damage) {
+        health = max(health - damage, 0);
     }
 }

@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
 
+import static java.lang.Math.max;
 import static java.lang.Math.pow;
 import static java.lang.Math.round;
 import static java.lang.Math.sqrt;
@@ -51,6 +52,12 @@ public class Hero implements Printable, WithVision, Fighter {
         health = getHealthTotal();
     }
 
+    //TODO ask for real name
+    @Override
+    public String getName() {
+        return "Player";
+    }
+
     @Override
     public int getHealth() {
         return health;
@@ -60,12 +67,6 @@ public class Hero implements Printable, WithVision, Fighter {
     public int getHealthTotal() {
         //complex formula that came from my mind and describes how I feel it should work
         return (int) ((1 + get(HEALTH) * 2 + (double) get(STRENGTH) / 2 + (double) get(AGILITY) / 3) * 5);
-    }
-
-    //TODO ask for real name
-    @Override
-    public String getName() {
-        return "Player";
     }
 
     @Override
@@ -78,5 +79,10 @@ public class Hero implements Printable, WithVision, Fighter {
     public int getMaxDamage() {
         //complex formula that came from my mind and describes how I feel it should work
         return (int) round(sqrt(pow(get(STRENGTH), 2) * (10 + pow(get(AGILITY), 2))));
+    }
+
+    @Override
+    public void damage(int damage) {
+        health = max(health - damage, 0);
     }
 }

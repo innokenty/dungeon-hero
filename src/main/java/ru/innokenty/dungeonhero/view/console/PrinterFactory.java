@@ -2,6 +2,7 @@ package ru.innokenty.dungeonhero.view.console;
 
 import ru.innokenty.dungeonhero.model.Fight;
 import ru.innokenty.dungeonhero.model.Hero;
+import ru.innokenty.dungeonhero.model.Punch;
 import ru.innokenty.dungeonhero.model.ViewPoint;
 import ru.innokenty.dungeonhero.view.Help;
 import ru.innokenty.dungeonhero.view.Message;
@@ -12,6 +13,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
+ * TODO replace with generic method chooser
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
 public class PrinterFactory {
@@ -24,6 +26,7 @@ public class PrinterFactory {
         PRINTER_MAP.put(Message.class, MessagePrinter.getInstance());
         PRINTER_MAP.put(Help.class, HelpPrinter.getInstance());
         PRINTER_MAP.put(Fight.class, FightPrinter.getInstance());
+        PRINTER_MAP.put(Punch.class, PunchPrinter.getInstance());
     }
 
     private PrinterFactory() {

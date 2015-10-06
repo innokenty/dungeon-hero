@@ -43,6 +43,11 @@ public class RectangularMap implements WorldMap {
     }
 
     @Override
+    public void setCell(Point location, Cell cell) {
+        cells[location.x][location.y] = cell;
+    }
+
+    @Override
     public Cell[][] getSubMap(int fromX, int toX, int fromY, int toY) {
         Cell[][] result = new Cell[toX - fromX + 1][];
         for (int i = 0; i < result.length; i++) {

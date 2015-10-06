@@ -8,16 +8,17 @@ import java.util.function.Consumer;
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
 public enum Command {
+    HELP('h', "help", "display this help"),
+    INFO('i', "info", "display character stats and info"),
     MAP('m', "map", "display the currently visible portion of the map"),
     MOVE_UP('w', "up", "move character up if applicable"),
     MOVE_RIGHT('d', "right", "move character right if applicable"),
     MOVE_DOWN('s', "down", "move character down if applicable"),
     MOVE_LEFT('a', "left", "move character left if applicable"),
-    INFO('i', "info", "display character stats and info"),
-    FIGHT_INFO('f', "fight info", "display the current fight info"),
-    SAVE('p', "save", "save the game to a file"),
-    LOAD('o', "open", "open previously saved game from a file"),
-    HELP('h', "help", "display this help"),
+    PUNCH('p', "punch", "hit the monster while fighting"),
+    FIGHT('f', "fight info", "display the current fight info"),
+    SAVE('k', "save", "save the game to a file"),
+    LOAD('l', "load", "open previously saved game from a file"),
     QUIT('q', "quit", "quit the game without saving");
 
     public final String key;

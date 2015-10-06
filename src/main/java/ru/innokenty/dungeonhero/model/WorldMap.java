@@ -17,6 +17,8 @@ public interface WorldMap {
 
     Cell getCell(Point cell);
 
+    void setCell(Point location, Cell cell);
+
     Cell[][] getSubMap(int fromX, int toX, int fromY, int toY);
 
     default boolean isAccessible(Point coords) {

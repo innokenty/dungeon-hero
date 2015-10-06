@@ -7,19 +7,19 @@ import ru.innokenty.dungeonhero.view.Printable;
  */
 public class Fight implements Printable {
 
-    private final Fighter fighter1;
-    private final Fighter fighter2;
+    private final Hero hero;
+    private final Monster monster;
 
-    public Fight(Fighter fighter1, Fighter fighter2) {
-        this.fighter1 = fighter1;
-        this.fighter2 = fighter2;
+    public Fight(Hero hero, Monster monster) {
+        this.hero = hero;
+        this.monster = monster;
     }
 
-    public Fighter getFighter1() {
-        return fighter1;
+    public Fighter getHero() {
+        return hero;
     }
 
-    public Fighter getFighter2() {
-        return fighter2;
+    public Fighter getMonster() {
+        return monster;
     }
 }

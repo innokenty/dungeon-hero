@@ -23,6 +23,10 @@ public class State {
         return viewPoint;
     }
 
+    public Fight getFight() {
+        return fight;
+    }
+
     public boolean isInFight() {
         return fight != null;
     }
@@ -31,7 +35,7 @@ public class State {
         this.fight = new Fight(hero, monster);
     }
 
-    public Fight getFight() {
-        return fight;
+    public void stopFight() {
+        this.fight = null;
     }
 }

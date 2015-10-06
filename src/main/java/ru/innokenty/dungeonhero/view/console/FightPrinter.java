@@ -20,15 +20,15 @@ public class FightPrinter implements Printer<Fight> {
     @Override
     public String stringify(Fight fight) {
         StringBuilder builder = new StringBuilder();
-        appendFighter(builder, fight.getFighter1());
-        builder.append("=========== VS ===========\n");
-        appendFighter(builder, fight.getFighter2());
+        appendFighter(builder, fight.getHero());
+        builder.append("\n=========== VS ===========\n");
+        appendFighter(builder, fight.getMonster());
         return builder.toString();
     }
 
     private void appendFighter(StringBuilder builder, Fighter fighter) {
         builder.append(fighter.getName()).append("\n")
                .append("HP => ").append(fighter.getHealth()).append("/").append(fighter.getHealthTotal()).append("\n")
-               .append("damage => ").append(fighter.getMinDamage()).append("-").append(fighter.getMaxDamage()).append("\n");
+               .append("damage => ").append(fighter.getMinDamage()).append("-").append(fighter.getMaxDamage());
     }
 }

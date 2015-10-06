@@ -32,6 +32,7 @@ public class HelpPrinter implements Printer<Help> {
                                           .append(command.name).append(" - ")
                                           .append(command.description)
                                           .append("\n"));
+        //TODO add map symbols description
         return builder.toString();
     }
 

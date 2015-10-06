@@ -39,6 +39,7 @@ public class ViewPoint implements Printable {
         return map;
     }
 
+    //TODO move to controller
     public Cell[][] getVisibleArea() {
         int vision = withVision.getVision();
 
@@ -75,5 +76,9 @@ public class ViewPoint implements Printable {
         }
 
         return result;
+    }
+
+    public void replaceCurrentCell(Cell cell) {
+        map.setCell(getLocation(), cell);
     }
 }
