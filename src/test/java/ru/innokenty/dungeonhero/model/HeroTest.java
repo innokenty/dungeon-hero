@@ -3,8 +3,6 @@ package ru.innokenty.dungeonhero.model;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static ru.innokenty.dungeonhero.model.Skill.AGILITY;
@@ -26,20 +24,22 @@ public class HeroTest {
 
     @Test
     public void testConstructor() {
-        Arrays.asList(Skill.values()).stream()
-              .forEach(s -> assertThat(hero.get(s), equalTo(1)));
+        assertSkills(1, 1, 1, 5);
     }
 
     @Test
     public void testUp() throws Exception {
         hero.up(STRENGTH);
-        Skill.forEach(s -> assertThat(hero.get(s), s == STRENGTH ? equalTo(2) : equalTo(1)));
         hero.up(STRENGTH);
-        Skill.forEach(s -> assertThat(hero.get(s), s == STRENGTH ? equalTo(3) : equalTo(1)));
-        hero.up(AGILITY);
-        assertThat(hero.get(STRENGTH), equalTo(3));
-        assertThat(hero.get(AGILITY),  equalTo(2));
-        assertThat(hero.get(HEALTH),   equalTo(1));
-        assertThat(hero.get(VISION),   equalTo(1));
+        assertSkills(3, 1, 1, 5);
+        hero.up(VISION);
+        assertSkills(3, 1, 1, 6);
+    }
+
+    private void assertSkills(int strength, int agility, int health, int vision) {
+        assertThat(hero.get(STRENGTH), equalTo(strength));
+        assertThat(hero.get(AGILITY), equalTo(agility));
+        assertThat(hero.get(HEALTH), equalTo(health));
+        assertThat(hero.get(VISION), equalTo(vision));
     }
 }
