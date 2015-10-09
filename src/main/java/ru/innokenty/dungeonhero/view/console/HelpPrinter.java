@@ -28,10 +28,11 @@ public class HelpPrinter implements Printer<Help> {
         StringBuilder builder = new StringBuilder();
         builder.append("Type in one or multiple command codes and press enter.\n")
                .append("The following commands are available:\n\n");
-        Command.forEach(command -> builder.append(command.key).append(", ")
-                                          .append(command.name).append(" - ")
-                                          .append(command.description)
-                                          .append("\n"));
+        Command.forEach(command -> builder
+               .append(command.key).append(", ")
+               .append(command.name).append(" - ")
+               .append(command.description)
+               .append("\n"));
         //TODO add map symbols description
         return builder.toString();
     }

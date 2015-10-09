@@ -26,10 +26,11 @@ public class HeroPrinter implements Printer<Hero> {
         builder.append("===== LEVEL ================\n")
                .append(exp.getLevel()).append("\n")
                .append("===== SKILLS ===============\n");
-        Skill.forEach(skill -> builder.append(skill.toString())
-                                      .append(" => ")
-                                      .append(hero.get(skill))
-                                      .append("\n"));
+        Skill.forEach(skill -> builder
+               .append(skill.toString())
+               .append(" => ")
+               .append(hero.get(skill))
+               .append("\n"));
         builder.append("===== EXPERIENCE ===========\n")
                .append("total => ").append(exp.getExpTotal()).append("\n")
                .append("next level => ")
