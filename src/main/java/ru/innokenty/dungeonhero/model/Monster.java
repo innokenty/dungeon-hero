@@ -21,6 +21,7 @@ public class Monster implements Fighter {
             "All-devouring Randomness of Existence"
     };
 
+    private final int level;
     private final int healthTotal;
     private int health;
     private final int minHitDamage;
@@ -29,11 +30,17 @@ public class Monster implements Fighter {
 
     public Monster(int level) {
         Random random = new Random();
+        this.level = level;
         this.name = NAMES[random.nextInt(NAMES.length)];
         this.healthTotal = level * 10 + random.nextInt((int) pow(level, 2));
         this.health = healthTotal;
         this.minHitDamage = level;
         this.maxHitDamage = minHitDamage + random.nextInt((int) pow(level, 2));
+    }
+
+    @Override
+    public int getLevel() {
+        return level;
     }
 
     @Override

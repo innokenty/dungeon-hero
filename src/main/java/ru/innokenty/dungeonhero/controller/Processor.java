@@ -1,6 +1,7 @@
 package ru.innokenty.dungeonhero.controller;
 
 import ru.innokenty.dungeonhero.model.Cell;
+import ru.innokenty.dungeonhero.model.Hero;
 import ru.innokenty.dungeonhero.model.Monster;
 import ru.innokenty.dungeonhero.model.MonsterCell;
 import ru.innokenty.dungeonhero.model.Punch;
@@ -11,11 +12,13 @@ import ru.innokenty.dungeonhero.view.Message;
 import ru.innokenty.dungeonhero.view.Printable;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static java.lang.String.format;
 import static java.util.Collections.singletonList;
+import static ru.innokenty.dungeonhero.controller.Command.toSkill;
 import static ru.innokenty.dungeonhero.model.Cell.FINISH;
 
 /**
@@ -32,70 +35,33 @@ public class Processor {
     }
 
     private void finish() {
-        setFinished(true);
-    }
-
-    private void setFinished(boolean finished) {
-        this.finished = finished;
+        this.finished = true;
     }
 
     public boolean hasFinished() {
         return finished;
     }
 
-    //TODO return single printable again, i.e. combine lists into new objects
     public List<Printable> handle(Command command) {
         switch (command) {
             case MOVE_UP:
             case MOVE_RIGHT:
             case MOVE_DOWN:
             case MOVE_LEFT:
-                if (state.isInFight()) {
-                    return singletonList(new Message(
-                            "You were fighting, remember? You can't escape, not this time, no!"));
-                }
-                Cell cell = move(command);
-                if (cell == null) {
-                    return singletonList(new Message("Unable to move there, don't you see?!"));
-                } else if (cell.isInteractable()) {
-                    return interact(cell);
-                }
+                return handleMove(command);
             case MAP:
                 return singletonList(state.getViewPoint());
             case INFO:
                 return singletonList(state.getHero());
-            case PUNCH:
-                if (!state.isInFight()) {
-                    return singletonList(new Message("Okay, you've punched some air in front of right on the face! "
-                            + "Or balls! Or whatever... Good job for sure, now what?"));
-                }
-
-                FightProcessor fight = new FightProcessor(state.getFight());
-                Punch punch = fight.hitOnce();
-                if (!fight.isOver()) {
-                    return singletonList(punch);
-                }
-
-                if (fight.heroWins()) {
-                    state.stopFight();
-                    state.getViewPoint().emptyCurrentCell();
-                    //TODO gain experience
-                    return Arrays.asList(
-                            punch,
-                            new Message("Oh yeah, you've done it, you slaved the beast!"),
-                            state.getViewPoint()
-                    );
-                } else {
-                    finish();
-                    return Arrays.asList(punch, new Message(
-                            "Oh poor boy, you're dead now. Or as they said in the old times: GAME OVER!"));
-                }
             case FIGHT:
-                if (!state.isInFight()) {
-                    return singletonList(new Message("Maaaan... Are you drunk? "
-                            + "Whom are you fighting do you think? I'm your friend, chill out!"));
-                }
-                return singletonList(state.getFight());
+                return handleFightInfo();
+            case PUNCH:
+                return handlePunch(command);
+            case STRENGTH:
+            case AGILITY:
+            case HEALTH:
+            case VISION:
+                return handleLevelUp(command);
             case SAVE:
                 //TODO implement
                 return singletonList(new Message("Successfully saved!"));
@@ -107,11 +73,24 @@ public class Processor {
             case HELP:
                 return singletonList(Help.getInstance());
             case QUIT:
-                finish();
-                return singletonList(new Message("Thank you, my hero, and good bye!"));
+                return handleQuit("Thank you, my hero, and good bye!");
             default:
                 throw new IllegalArgumentException(format("Command '%s' is not supported!", command));
         }
+    }
+
+    private List<Printable> handleMove(Command command) {
+        if (state.isInFight()) {
+            return singletonList(new Message(
+                    "You were fighting, remember? You can't escape, not this time, no!"));
+        }
+        Cell cell = move(command);
+        if (cell == null) {
+            return singletonList(new Message("Unable to move there, don't you see?!"));
+        } else if (cell.isInteractable()) {
+            return interact(cell);
+        }
+        return singletonList(state.getViewPoint());
     }
 
     public Cell move(Command moveCommand) {
@@ -142,8 +121,7 @@ public class Processor {
 
     private List<Printable> interact(Cell cell) {
         if (cell == FINISH) {
-            finish();
-            return singletonList(new Message("This is it! You've made it, my hero! Congrats, boy!"));
+            return handleQuit("This is it! You've made it, my hero! Congrats, boy!");
         }
 
         if (cell instanceof MonsterCell) {
@@ -160,5 +138,70 @@ public class Processor {
                 "Interaction with cell of type %s is not yet implemented!",
                 cell.getClass().getSimpleName()
         ));
+    }
+
+    private List<Printable> handleFightInfo() {
+        return state.isInFight()
+               ? singletonList(state.getFight())
+               : singletonList(new Message("Maaaan... Are you drunk? "
+                       + "Whom are you fighting do you think? I'm your friend, chill out!"));
+    }
+
+    private List<Printable> handlePunch(Command command) {
+        if (!state.isInFight()) {
+            return singletonList(new Message("Okay, you've punched some air in front of right on the face! "
+                    + "Or balls! Or whatever... Good job for sure, now what?"));
+        }
+
+        FightProcessor fight = new FightProcessor(state.getFight());
+        Punch punch = fight.hitOnce();
+        if (!fight.isOver()) {
+            return singletonList(punch);
+        }
+
+        if (fight.heroWins()) {
+            Hero hero = state.getHero();
+            int experienceGained = fight.getExperience();
+            hero.getExperience().gain(experienceGained);
+            state.stopFight();
+            state.getViewPoint().emptyCurrentCell();
+
+            List<Printable> output = new ArrayList<>(Arrays.asList(punch, new Message(format(
+                    "Oh yeah, you've done it, you slaved the beast! You gain %d experience.",
+                    experienceGained))));
+
+            if (hero.getExperience().levelUp()) {
+                state.startLevelUpPick();
+                output.add(new Message(format(
+                        "LEVEL UP! You're now on level %d. Pick a skill to increase! (see help for details)",
+                        hero.getLevel())));
+            } else {
+                output.add(state.getViewPoint());
+            }
+            return output;
+        } else {
+            finish();
+            return Arrays.asList(punch, new Message(
+                    "Oh poor boy, you're dead now. Or as they said in the old times: GAME OVER!"));
+        }
+    }
+
+    private List<Printable> handleLevelUp(Command command) {
+        if (!state.isLevelUpPick()) {
+            return singletonList(new Message("Haha, nice try! Why don't you fight someone "
+                    + "instead of jerking around hm? Or I'll call for a REAL hero! How are feeling now?!"));
+        }
+        Hero hero = state.getHero();
+        hero.up(toSkill(command));
+        if (hero.getExperience().levelUp()) {
+            return singletonList(new Message("And even one more level up! You're now on level " + hero.getLevel()));
+        }
+        state.finishLevelUpPick();
+        return Arrays.asList(new Message("Ok, you're stronger now!"), hero);
+    }
+
+    private List<Printable> handleQuit(String message) {
+        finish();
+        return singletonList(new Message(message));
     }
 }

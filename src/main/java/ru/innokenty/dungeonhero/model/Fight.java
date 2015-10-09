@@ -15,11 +15,11 @@ public class Fight implements Printable {
         this.monster = monster;
     }
 
-    public Fighter getHero() {
+    public Hero getHero() {
         return hero;
     }
 
-    public Fighter getMonster() {
+    public Monster getMonster() {
         return monster;
     }
 }

@@ -1,5 +1,6 @@
 package ru.innokenty.dungeonhero.controller;
 
+import ru.innokenty.dungeonhero.model.Experience;
 import ru.innokenty.dungeonhero.model.Fight;
 import ru.innokenty.dungeonhero.model.Fighter;
 import ru.innokenty.dungeonhero.model.Punch;
@@ -24,7 +25,8 @@ public class FightProcessor {
     }
 
     private int hit(Fighter fighter1, Fighter fighter2) {
-        int damage = fighter1.getMinDamage() + new Random().nextInt(fighter1.getMaxDamage());
+        int diff = fighter1.getMaxDamage() - fighter1.getMinDamage();
+        int damage = fighter1.getMinDamage() + (diff > 0 ? new Random().nextInt(diff) : 0);
         fighter2.damage(damage);
         return damage;
     }
@@ -39,5 +41,12 @@ public class FightProcessor {
 
     public boolean heroWins() {
         return isOver() && !isDead(hero);
+    }
+
+    public int getExperience() {
+        return (int) (monster.getLevel()
+                * (1 + (double) hero.getHealth() / hero.getHealthTotal())
+                * Experience.SCALE_FACTOR
+                * (1.3 + Math.random()));
     }
 }

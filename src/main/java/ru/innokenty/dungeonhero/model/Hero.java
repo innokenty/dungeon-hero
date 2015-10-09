@@ -52,6 +52,11 @@ public class Hero implements Printable, WithVision, Fighter {
         health = getHealthTotal();
     }
 
+    @Override
+    public int getLevel() {
+        return getExperience().getLevel();
+    }
+
     //TODO ask for real name
     @Override
     public String getName() {
@@ -66,19 +71,19 @@ public class Hero implements Printable, WithVision, Fighter {
     @Override
     public int getHealthTotal() {
         //complex formula that came from my mind and describes how I feel it should work
-        return (int) ((1 + get(HEALTH) * 2 + (double) get(STRENGTH) / 2 + (double) get(AGILITY) / 3) * 5);
+        return (int) pow((get(HEALTH) * 2 + (double) get(STRENGTH) / 2 + (double) get(AGILITY) / 4) + 2, 2);
     }
 
     @Override
     public int getMinDamage() {
         //complex formula that came from my mind and describes how I feel it should work
-        return (int) round(sqrt(get(STRENGTH) * (1 + pow(get(AGILITY), 2))));
+        return (int) round(sqrt(get(STRENGTH) * (1 + pow(max(0, get(AGILITY) - 1), 3))));
     }
 
     @Override
     public int getMaxDamage() {
         //complex formula that came from my mind and describes how I feel it should work
-        return (int) round(sqrt(pow(get(STRENGTH), 2) * (10 + pow(get(AGILITY), 2))));
+        return (int) round(sqrt(pow(get(STRENGTH), 2) * (10 + 1.5 * pow(get(AGILITY), 3))));
     }
 
     @Override

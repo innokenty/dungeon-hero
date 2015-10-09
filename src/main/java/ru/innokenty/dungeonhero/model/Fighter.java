@@ -5,6 +5,7 @@ package ru.innokenty.dungeonhero.model;
  */
 public interface Fighter {
 
+    int getLevel();
     String getName();
     int getHealth();
     int getHealthTotal();

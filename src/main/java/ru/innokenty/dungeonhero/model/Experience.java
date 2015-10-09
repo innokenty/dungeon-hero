@@ -6,7 +6,7 @@ package ru.innokenty.dungeonhero.model;
  */
 public class Experience {
 
-    private static final int SCALE_FACTOR = 1000;
+    public static final int SCALE_FACTOR = 1000;
 
     private int level = 1;
     private int expTotal = 0;
@@ -19,7 +19,7 @@ public class Experience {
 
     public boolean levelUp() {
         if (expSinceLastLevel > getExpForNextLevel()) {
-            expSinceLastLevel %= getExpForNextLevel();
+            expSinceLastLevel -= getExpForNextLevel();
             level++;
             return true;
         }

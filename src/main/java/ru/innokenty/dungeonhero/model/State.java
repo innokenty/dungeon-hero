@@ -10,9 +10,11 @@ public class State {
 
     private Fight fight;
 
+    private boolean levelUp;
+
     public State(WorldMap map) {
-        this.hero = new Hero();
-        this.viewPoint = new ViewPoint(map, hero);
+        hero = new Hero();
+        viewPoint = new ViewPoint(map, hero);
     }
 
     public Hero getHero() {
@@ -32,10 +34,22 @@ public class State {
     }
 
     public void startFightWith(Monster monster) {
-        this.fight = new Fight(hero, monster);
+        fight = new Fight(hero, monster);
     }
 
     public void stopFight() {
-        this.fight = null;
+        fight = null;
+    }
+
+    public boolean isLevelUpPick() {
+        return levelUp;
+    }
+
+    public void startLevelUpPick() {
+        levelUp = true;
+    }
+
+    public void finishLevelUpPick() {
+        levelUp = false;
     }
 }
