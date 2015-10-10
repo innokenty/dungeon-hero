@@ -5,8 +5,6 @@ import ru.innokenty.dungeonhero.model.Fight;
 import ru.innokenty.dungeonhero.model.Fighter;
 import ru.innokenty.dungeonhero.model.Punch;
 
-import java.util.Random;
-
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
@@ -15,20 +13,18 @@ public class FightProcessor {
     private final Fighter hero;
     private final Fighter monster;
 
+    private final EvenDamageDistributionModel damageModel = new EvenDamageDistributionModel();
+
     public FightProcessor(Fight fight) {
         hero = fight.getHero();
         monster = fight.getMonster();
     }
 
     public Punch hitOnce() {
-        return new Punch(hit(hero, monster), hit(monster, hero));
-    }
-
-    private int hit(Fighter fighter1, Fighter fighter2) {
-        int diff = fighter1.getMaxDamage() - fighter1.getMinDamage();
-        int damage = fighter1.getMinDamage() + (diff > 0 ? new Random().nextInt(diff) : 0);
-        fighter2.damage(damage);
-        return damage;
+        return new Punch(
+                hero.hit(monster, damageModel),
+                monster.hit(hero, damageModel)
+        );
     }
 
     public boolean isOver() {
