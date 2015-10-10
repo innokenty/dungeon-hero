@@ -1,7 +1,6 @@
 package ru.innokenty.dungeonhero.model;
 
 import java.awt.Point;
-import java.util.Collections;
 
 import static java.lang.Math.max;
 import static java.lang.Math.min;
@@ -37,7 +36,6 @@ public class ViewPoint {
         return map;
     }
 
-    //TODO move to controller
     public Cell[][] getVisibleArea() {
         int vision = withVision.getVision();
 
@@ -49,26 +47,16 @@ public class ViewPoint {
         int locationX = vision + min(fromX, 0);
         int locationY = vision + min(fromY, 0);
 
-        Cell[][] subMap = map.getSubMap(max(fromX, 0), toX, max(fromY, 0), toY);
-        int lengthX = subMap.length;
-        int lengthY = subMap[0].length;
-
-        Cell[][] result = new Cell[lengthX + 2][lengthY + 2];
-        Collections.nCopies(lengthY + 2, DARK).toArray(result[0]);
-        Collections.nCopies(lengthY + 2, DARK).toArray(result[lengthX + 1]);
-        for (int i = 0; i < lengthX + 2; i++) {
-            result[i][0] = DARK;
-            result[i][lengthY + 1] = DARK;
-        }
+        Cell[][] result = map.getSubMap(max(fromX, 0), toX, max(fromY, 0), toY);
+        int lengthX = result.length;
+        int lengthY = result[0].length;
 
         for (int i = 0; i < lengthX; i++) {
             for (int j = 0; j < lengthY; j++) {
                 if (pow(i - locationX, 2) + pow(j - locationY, 2) > pow(vision, 2)) {
-                    result[i + 1][j + 1] = DARK;
+                    result[i][j] = DARK;
                 } else if (i == locationX && j == locationY) {
-                    result[i + 1][j + 1] = HERO;
-                } else {
-                    result[i + 1][j + 1] = subMap[i][j];
+                    result[i][j] = HERO;
                 }
             }
         }
