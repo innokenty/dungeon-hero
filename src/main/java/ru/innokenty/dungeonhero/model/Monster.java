@@ -18,7 +18,17 @@ public class Monster implements Fighter {
             "Ant-tiger",
             "Hungry Anteater",
             "Psychopathic Grandma",
-            "All-devouring Randomness of Existence"
+            "All-devouring Randomness of Existence",
+            "Alien nazi invasion from outer space",
+            "Robot Godzilla",
+            "Monkey armed with a banana",
+            "Her Majesty the Queen of England",
+            "Bloody succubus",
+            "Thirsty beer-addict",
+            "Dirty Sanchez",
+            "Speedy Gonzalez",
+            "Bear with balalayka",
+            "Babushka with telezhka"
     };
 
     private final int level;
