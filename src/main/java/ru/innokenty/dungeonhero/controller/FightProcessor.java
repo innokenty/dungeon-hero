@@ -48,7 +48,7 @@ public class FightProcessor {
     public int getExperience() {
         return (int) (Experience.SCALE_FACTOR
                 * monster.getLevel()
-                * pow(monster.getLevel() / hero.getLevel(), 2/3)
+                * pow(monster.getLevel() / hero.getLevel(), 3/2)
                 * (1 + Math.random() / 2));
     }
 }
