@@ -26,7 +26,8 @@ public class HelpPrinter implements Printer<Help> {
 
     private static String buildHelpMessage() {
         StringBuilder builder = new StringBuilder();
-        builder.append("To play type in one or multiple command codes and press enter.\n\n")
+        builder.append("To play type in one or multiple command codes and press enter.\n")
+               .append("\n")
                .append("The following commands are available:\n");
         Command.forEach(command -> builder
                .append(command.key).append(", ")
@@ -39,7 +40,12 @@ public class HelpPrinter implements Printer<Help> {
                .append("-+|     - walls\n")
                .append(".       - darkness, i.e. a cell that is out of vision\n")
                .append("@       - represents a portal, the map successful finish\n")
-               .append("number  - a monster of the corresponding level\n");
+               .append("number  - a monster of the corresponding level\n")
+               .append("\n")
+               .append("The hero skills work as follows:\n")
+               .append("health increases amount of hit points only\n")
+               .append("strength drastically increases maximum damage and gives some hit points\n")
+               .append("agility increases both minimum and maximum damage and gives a bit of hit points\n");
         return builder.toString();
     }
 
