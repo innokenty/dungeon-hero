@@ -7,9 +7,6 @@ import ru.innokenty.dungeonhero.input.CommandIterator;
 import ru.innokenty.dungeonhero.model.State;
 import ru.innokenty.dungeonhero.view.Output;
 
-import static ru.innokenty.dungeonhero.controller.Command.HELP;
-import static ru.innokenty.dungeonhero.controller.Command.MAP;
-
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
@@ -26,9 +23,6 @@ public class DungeonHero {
     }
 
     public void start() {
-        runCommand(HELP);
-        runCommand(MAP);
-
         while (commandIterator.hasNext()) {
             try {
                 runCommand(commandIterator.next());

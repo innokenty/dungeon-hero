@@ -33,7 +33,7 @@ public class ViewPointPrinter implements Printer<ViewPoint> {
             }
         }
 
-        return builder.toString();
+        return builder.append("\n").toString();
     }
 
     private Cell[][] surroundWithDarkness(Cell[][] viewPoint) {
