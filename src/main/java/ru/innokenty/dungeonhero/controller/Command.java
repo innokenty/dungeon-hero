@@ -10,22 +10,22 @@ import java.util.function.Consumer;
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
 public enum Command {
-    HELP('h', "help", "display this help"),
-    INFO('i', "info", "display character stats and info"),
-    MAP('m', "map", "display the currently visible portion of the map"),
-    MOVE_UP('w', "up", "move character up if applicable"),
-    MOVE_RIGHT('d', "right", "move character right if applicable"),
-    MOVE_DOWN('s', "down", "move character down if applicable"),
-    MOVE_LEFT('a', "left", "move character left if applicable"),
-    PUNCH('p', "punch", "hit the monster while fighting"),
-    FIGHT('f', "fight info", "display the current fight info"),
-    STRENGTH('z', "+1 strength", "when gaining a new level you will be prompted which skill you want to upgrade"),
-    AGILITY('x', "+1 agility", "when gaining a new level you will be prompted which skill you want to upgrade"),
-    HEALTH('c', "+1 health", "when gaining a new level you will be prompted which skill you want to upgrade"),
-    VISION('v', "+1 vision", "when gaining a new level you will be prompted which skill you want to upgrade"),
-    SAVE('k', "save", "save the game to a file"),
-    LOAD('l', "load", "open previously saved game from a file"),
-    QUIT('q', "quit", "quit the game without saving");
+    HELP       ('h', "help",        "display this help"),
+    INFO       ('i', "info",        "display character stats and info"),
+    MAP        ('m', "map",         "display the currently visible portion of the map"),
+    MOVE_UP    ('w', "up",          "move character up if applicable"),
+    MOVE_RIGHT ('d', "right",       "move character right if applicable"),
+    MOVE_DOWN  ('s', "down",        "move character down if applicable"),
+    MOVE_LEFT  ('a', "left",        "move character left if applicable"),
+    PUNCH      ('p', "punch",       "hit the monster while fighting"),
+    FIGHT      ('f', "fight info",  "display the current fight info"),
+    STRENGTH   ('z', "+1 strength", "increase strength when gaining a new level"),
+    AGILITY    ('x', "+1 agility",  "increase agility when gaining a new level"),
+    HEALTH     ('c', "+1 health",   "increase health when gaining a new level"),
+    VISION     ('v', "+1 vision",   "increase vision when gaining a new level"),
+    SAVE       ('k', "save",        "save the game to a file"),
+    LOAD       ('l', "load",        "open previously saved game from a file"),
+    QUIT       ('q', "quit",        "quit the game without saving");
 
     public final String key;
     public final String name;
@@ -49,7 +49,7 @@ public enum Command {
     }
 
     public static Skill toSkill(Command command) {
-        switch (command) {
+        switch(command) {
             case STRENGTH: return Skill.STRENGTH;
             case AGILITY:  return Skill.AGILITY;
             case HEALTH:   return Skill.HEALTH;
