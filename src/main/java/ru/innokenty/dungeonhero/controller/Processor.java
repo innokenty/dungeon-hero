@@ -151,7 +151,7 @@ public class Processor {
                     + "Or balls! Or whatever... Good job for sure, now what?"));
         }
 
-        FightProcessor fight = new FightProcessor(state.getFight());
+        FightProcessor fight = new FightProcessor(state.getFight(), state.getDamageModel());
         Punch punch = fight.hitOnce();
         if (!fight.isOver()) {
             return singletonList(punch);

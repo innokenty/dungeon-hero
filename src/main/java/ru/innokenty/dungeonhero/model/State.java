@@ -1,5 +1,8 @@
 package ru.innokenty.dungeonhero.model;
 
+import ru.innokenty.dungeonhero.controller.DamageDistributionModel;
+import ru.innokenty.dungeonhero.controller.UniformDamageDistributionModel;
+
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
@@ -7,6 +10,7 @@ public class State {
 
     private final Hero hero;
     private final ViewPoint viewPoint;
+    private final DamageDistributionModel damageModel;
 
     private Fight fight;
 
@@ -15,6 +19,7 @@ public class State {
     public State(WorldMap map) {
         hero = new Hero();
         viewPoint = new ViewPoint(map, hero);
+        damageModel = new UniformDamageDistributionModel();
     }
 
     public Hero getHero() {
@@ -23,6 +28,10 @@ public class State {
 
     public ViewPoint getViewPoint() {
         return viewPoint;
+    }
+
+    public DamageDistributionModel getDamageModel() {
+        return damageModel;
     }
 
     public Fight getFight() {

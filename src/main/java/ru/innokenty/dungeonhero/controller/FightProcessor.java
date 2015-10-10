@@ -13,11 +13,12 @@ public class FightProcessor {
     private final Fighter hero;
     private final Fighter monster;
 
-    private final EvenDamageDistributionModel damageModel = new EvenDamageDistributionModel();
+    private final DamageDistributionModel damageModel;
 
-    public FightProcessor(Fight fight) {
+    public FightProcessor(Fight fight, DamageDistributionModel damageModel) {
         hero = fight.getHero();
         monster = fight.getMonster();
+        this.damageModel = damageModel;
     }
 
     public Punch hitOnce() {
