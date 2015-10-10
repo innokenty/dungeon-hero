@@ -1,7 +1,5 @@
 package ru.innokenty.dungeonhero.model;
 
-import ru.innokenty.dungeonhero.view.Printable;
-
 import java.awt.Point;
 import java.util.Collections;
 
@@ -15,7 +13,7 @@ import static ru.innokenty.dungeonhero.model.Cell.HERO;
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
-public class ViewPoint implements Printable {
+public class ViewPoint {
 
     private final WorldMap map;
     private final WithVision withVision;

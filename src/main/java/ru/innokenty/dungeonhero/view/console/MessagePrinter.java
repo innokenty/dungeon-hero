@@ -7,17 +7,13 @@ import ru.innokenty.dungeonhero.view.Message;
  */
 public class MessagePrinter implements Printer<Message> {
 
-    private static final MessagePrinter instance = new MessagePrinter();
-
-    public static MessagePrinter getInstance() {
-        return instance;
-    }
-
-    private MessagePrinter() {
-    }
-    
     @Override
-    public String stringify(Message message) {
+    public boolean accept(Object printable) {
+        return printable instanceof Message;
+    }
+
+    @Override
+    public String print(Message message) {
         return message.getMessage();
     }
 }

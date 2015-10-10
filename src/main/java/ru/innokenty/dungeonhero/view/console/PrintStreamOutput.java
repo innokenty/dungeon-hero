@@ -2,7 +2,6 @@ package ru.innokenty.dungeonhero.view.console;
 
 import ru.innokenty.dungeonhero.controller.UnsupportedCommandException;
 import ru.innokenty.dungeonhero.view.Output;
-import ru.innokenty.dungeonhero.view.Printable;
 
 import java.io.PrintStream;
 
@@ -20,8 +19,8 @@ public class PrintStreamOutput implements Output {
     }
 
     @Override
-    public void output(Printable printable) {
-        outStream.println(PrinterFactory.getPrinterFor(printable).stringify(printable));
+    public void output(Object printable) {
+        outStream.println(PrinterFactory.getPrinterFor(printable).print(printable));
     }
 
     @Override

@@ -10,17 +10,13 @@ public class HelpPrinter implements Printer<Help> {
 
     private static final String HELP_MESSAGE = buildHelpMessage();
 
-    private static final HelpPrinter instance = new HelpPrinter();
-
-    public static HelpPrinter getInstance() {
-        return instance;
-    }
-
-    private HelpPrinter() {
+    @Override
+    public boolean accept(Object printable) {
+        return printable instanceof Help;
     }
 
     @Override
-    public String stringify(Help help) {
+    public String print(Help help) {
         return HELP_MESSAGE;
     }
 
@@ -60,5 +56,4 @@ public class HelpPrinter implements Printer<Help> {
                .append("4) It's easier to type multiple commands in and then press enter once.\n");
         return builder.toString();
     }
-
 }

@@ -1,11 +1,9 @@
 package ru.innokenty.dungeonhero.model;
 
-import ru.innokenty.dungeonhero.view.Printable;
-
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
-public class Punch implements Printable {
+public class Punch {
 
     private final int heroDamage;
     private final int monsterDamage;

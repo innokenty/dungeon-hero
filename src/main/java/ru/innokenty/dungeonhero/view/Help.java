@@ -3,7 +3,7 @@ package ru.innokenty.dungeonhero.view;
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
-public class Help implements Printable {
+public class Help {
 
     private static final Help instance = new Help();
 

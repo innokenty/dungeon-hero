@@ -8,17 +8,13 @@ import ru.innokenty.dungeonhero.model.Fighter;
  */
 public class FightPrinter implements Printer<Fight> {
 
-    private static final FightPrinter instance = new FightPrinter();
-
-    public static FightPrinter getInstance() {
-        return instance;
-    }
-
-    private FightPrinter() {
+    @Override
+    public boolean accept(Object printable) {
+        return printable instanceof Fight;
     }
 
     @Override
-    public String stringify(Fight fight) {
+    public String print(Fight fight) {
         StringBuilder builder = new StringBuilder();
         appendFighter(builder, fight.getHero());
         builder.append("\n=========== VS ===========\n");

@@ -7,17 +7,13 @@ import ru.innokenty.dungeonhero.model.Punch;
  */
 public class PunchPrinter implements Printer<Punch> {
 
-    private static final PunchPrinter instance = new PunchPrinter();
-
-    public static PunchPrinter getInstance() {
-        return instance;
-    }
-
-    private PunchPrinter() {
+    @Override
+    public boolean accept(Object printable) {
+        return printable instanceof Punch;
     }
 
     @Override
-    public String stringify(Punch punch) {
+    public String print(Punch punch) {
         return new StringBuilder()
                 .append("You punch the beast as hard as you can, you deal ")
                 .append(punch.getHeroDamage())

@@ -1,41 +1,31 @@
 package ru.innokenty.dungeonhero.view.console;
 
-import ru.innokenty.dungeonhero.model.Fight;
-import ru.innokenty.dungeonhero.model.Hero;
-import ru.innokenty.dungeonhero.model.Punch;
-import ru.innokenty.dungeonhero.model.ViewPoint;
-import ru.innokenty.dungeonhero.view.Help;
-import ru.innokenty.dungeonhero.view.Message;
-import ru.innokenty.dungeonhero.view.Printable;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.Arrays;
+import java.util.List;
 
 /**
- * TODO replace with generic method chooser
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
 public class PrinterFactory {
 
-    public static final Map<Class<? extends Printable>, Printer> PRINTER_MAP = new HashMap<>(2);
-
-    static {
-        PRINTER_MAP.put(Hero.class, HeroPrinter.getInstance());
-        PRINTER_MAP.put(ViewPoint.class, ViewPointPrinter.getInstance());
-        PRINTER_MAP.put(Message.class, MessagePrinter.getInstance());
-        PRINTER_MAP.put(Help.class, HelpPrinter.getInstance());
-        PRINTER_MAP.put(Fight.class, FightPrinter.getInstance());
-        PRINTER_MAP.put(Punch.class, PunchPrinter.getInstance());
-    }
+    private static final List<Printer<?>> PRINTERS = Arrays.asList(
+            new HeroPrinter(),
+            new ViewPointPrinter(),
+            new MessagePrinter(),
+            new HelpPrinter(),
+            new FightPrinter(),
+            new PunchPrinter()
+    );
 
     private PrinterFactory() {
     }
 
-    public static <T extends Printable> Printer<T> getPrinterFor(Printable printable) {
+    public static <T> Printer<T> getPrinterFor(Object printable) {
         //noinspection unchecked
-        return Optional.ofNullable(PRINTER_MAP.get(printable.getClass()))
-                       .orElseThrow(() -> new IllegalArgumentException(
-                               "Can not create printer for " + printable.getClass().getSimpleName()));
+        return (Printer<T>) PRINTERS.stream()
+                .filter(printer -> printer.accept(printable))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Can not create printer for " + printable.getClass().getSimpleName()));
     }
 }

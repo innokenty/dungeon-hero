@@ -1,11 +1,9 @@
 package ru.innokenty.dungeonhero.model;
 
-import ru.innokenty.dungeonhero.view.Printable;
-
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
-public class Fight implements Printable {
+public class Fight {
 
     private final Hero hero;
     private final Monster monster;

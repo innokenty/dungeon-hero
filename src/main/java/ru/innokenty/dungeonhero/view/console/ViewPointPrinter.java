@@ -8,17 +8,13 @@ import ru.innokenty.dungeonhero.model.ViewPoint;
  */
 public class ViewPointPrinter implements Printer<ViewPoint> {
 
-    private static final ViewPointPrinter instance = new ViewPointPrinter();
-
-    public static ViewPointPrinter getInstance() {
-        return instance;
-    }
-
-    private ViewPointPrinter() {
+    @Override
+    public boolean accept(Object printable) {
+        return printable instanceof ViewPoint;
     }
 
     @Override
-    public String stringify(ViewPoint viewPoint) {
+    public String print(ViewPoint viewPoint) {
         Cell[][] visible = viewPoint.getVisibleArea();
         StringBuilder builder = new StringBuilder();
 

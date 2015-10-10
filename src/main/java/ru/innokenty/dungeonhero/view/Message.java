@@ -3,7 +3,7 @@ package ru.innokenty.dungeonhero.view;
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
-public class Message implements Printable {
+public class Message {
 
     private final String message;
 

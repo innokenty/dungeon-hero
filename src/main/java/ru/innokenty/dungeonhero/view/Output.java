@@ -6,6 +6,6 @@ import ru.innokenty.dungeonhero.controller.UnsupportedCommandException;
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
 public interface Output {
-    void output(Printable printable);
+    void output(Object printable);
     void outputException(UnsupportedCommandException e);
 }

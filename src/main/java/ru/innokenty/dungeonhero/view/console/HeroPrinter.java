@@ -9,16 +9,12 @@ import ru.innokenty.dungeonhero.model.Skill;
  */
 public class HeroPrinter implements Printer<Hero> {
 
-    private static final HeroPrinter instance = new HeroPrinter();
-
-    public static HeroPrinter getInstance() {
-        return instance;
+    @Override
+    public boolean accept(Object printable) {
+        return printable instanceof Hero;
     }
 
-    private HeroPrinter() {
-    }
-
-    public String stringify(Hero hero) {
+    public String print(Hero hero) {
         Experience exp = hero.getExperience();
 
         StringBuilder builder = new StringBuilder();
