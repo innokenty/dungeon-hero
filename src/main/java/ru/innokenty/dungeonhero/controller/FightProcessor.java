@@ -7,6 +7,8 @@ import ru.innokenty.dungeonhero.model.Punch;
 
 import java.util.Random;
 
+import static java.lang.Math.pow;
+
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
@@ -44,9 +46,9 @@ public class FightProcessor {
     }
 
     public int getExperience() {
-        return (int) (monster.getLevel()
-                * (1 + (double) hero.getHealth() / hero.getHealthTotal())
-                * Experience.SCALE_FACTOR
-                * (1.3 + Math.random()));
+        return (int) (Experience.SCALE_FACTOR
+                * monster.getLevel()
+                * pow(monster.getLevel() / hero.getLevel(), 2/3)
+                * (1 + Math.random() / 2));
     }
 }

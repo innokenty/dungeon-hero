@@ -18,7 +18,7 @@ public class Experience {
     }
 
     public boolean levelUp() {
-        if (expSinceLastLevel > getExpForNextLevel()) {
+        if (expSinceLastLevel >= getExpForNextLevel()) {
             expSinceLastLevel -= getExpForNextLevel();
             level++;
             return true;
@@ -39,7 +39,7 @@ public class Experience {
     }
 
     public int getExpForNextLevel() {
-        return level * SCALE_FACTOR;
+        return (level + 1) * SCALE_FACTOR;
     }
 
     public int getExpUntilNextLevel() {
