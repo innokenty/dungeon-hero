@@ -45,7 +45,11 @@ public class HelpPrinter implements Printer<Help> {
                .append("The hero skills work as follows:\n")
                .append("health increases amount of hit points only\n")
                .append("strength drastically increases maximum damage and gives some hit points\n")
-               .append("agility increases both minimum and maximum damage and gives a bit of hit points\n");
+               .append("agility increases both minimum and maximum damage and gives a bit of hit points\n")
+               .append("\n")
+               .append("You gain experience for each fight proportional to:\n")
+               .append("slayed beast level\n")
+               .append("division of the beast level by your level\n");
         return builder.toString();
     }
 
