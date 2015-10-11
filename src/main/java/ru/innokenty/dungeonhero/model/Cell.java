@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
-public class Cell implements Serializable {
+public abstract class Cell implements Serializable {
 
     public static final Cell EMPTY  = new Empty();
     public static final Cell DARK   = new Dark();
@@ -15,11 +15,11 @@ public class Cell implements Serializable {
 
     private final boolean interactable;
 
-    protected Cell() {
+    public Cell() {
         this(false);
     }
 
-    protected Cell(boolean interactable) {
+    public Cell(boolean interactable) {
         this.interactable = interactable;
     }
 
