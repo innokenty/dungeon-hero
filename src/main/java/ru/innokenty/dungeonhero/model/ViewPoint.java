@@ -26,7 +26,7 @@ public class ViewPoint implements Serializable {
     }
 
     public Point getLocation() {
-        return new Point(location);
+        return location;
     }
 
     public void setLocation(Point location) {

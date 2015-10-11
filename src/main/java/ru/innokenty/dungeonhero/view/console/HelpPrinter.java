@@ -1,7 +1,8 @@
 package ru.innokenty.dungeonhero.view.console;
 
-import ru.innokenty.dungeonhero.controller.Command;
 import ru.innokenty.dungeonhero.view.Help;
+
+import static ru.innokenty.dungeonhero.controller.command.Command.COMMANDS;
 
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
@@ -25,10 +26,10 @@ public class HelpPrinter implements Printer<Help> {
         builder.append("To play type in one or multiple command codes and press enter.\n")
                .append("\n")
                .append("The following commands are available:\n");
-        Command.forEach(command -> builder
-               .append(command.key).append(", ")
-               .append(command.name).append(" - ")
-               .append(command.description)
+        COMMANDS.stream().forEach(command -> builder
+               .append(command.getKey()).append(", ")
+               .append(command.getName()).append(" - ")
+               .append(command.getDescription())
                .append("\n"));
         builder.append("\n")
                .append("The map symbols denote the following:\n")

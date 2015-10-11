@@ -1,6 +1,7 @@
 package ru.innokenty.dungeonhero.controller;
 
 import ru.innokenty.dungeonhero.DungeonHeroException;
+import ru.innokenty.dungeonhero.controller.command.*;
 import ru.innokenty.dungeonhero.model.Cell;
 import ru.innokenty.dungeonhero.model.Cell.Finish;
 import ru.innokenty.dungeonhero.model.Hero;
@@ -25,7 +26,6 @@ import java.util.List;
 
 import static java.lang.String.format;
 import static java.util.Collections.singletonList;
-import static ru.innokenty.dungeonhero.controller.Command.toSkill;
 
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
@@ -51,39 +51,31 @@ public class Processor {
     }
 
     public List<?> handle(Command command) {
-        switch (command) {
-            case MOVE_UP:
-            case MOVE_RIGHT:
-            case MOVE_DOWN:
-            case MOVE_LEFT:
-                return handleMove(command);
-            case MAP:
-                return singletonList(state.getViewPoint());
-            case INFO:
-                return singletonList(state.getHero());
-            case FIGHT:
-                return handleFightInfo(command);
-            case PUNCH:
-                return handlePunch(command);
-            case STRENGTH:
-            case AGILITY:
-            case HEALTH:
-            case VISION:
-                return handleLevelUp(command);
-            case SAVE:
-                return handleSave(command);
-            case LOAD:
-                return handleLoad(command);
-            case HELP:
-                return singletonList(Help.getInstance());
-            case QUIT:
-                return handleQuit("Thank you, my hero, and good bye!");
-            default:
-                throw new IllegalArgumentException(format("Command '%s' is not supported!", command));
+        if (command instanceof MoveCommand) {
+            return handleMove((MoveCommand) command);
+        } else if (command instanceof MapCommand) {
+            return singletonList(state.getViewPoint());
+        } else if (command instanceof InfoCommand) {
+            return singletonList(state.getHero());
+        } else if (command instanceof FightCommand) {
+            return handleFightInfo((FightCommand) command);
+        } else if (command instanceof PunchCommand) {
+            return handlePunch((PunchCommand) command);
+        } else if (command instanceof LevelUpCommand) {
+            return handleLevelUp((LevelUpCommand) command);
+        } else if (command instanceof SaveGameCommand) {
+            return handleSave((SaveGameCommand) command);
+        } else if (command instanceof LoadGameCommand) {
+            return handleLoad((LoadGameCommand) command);
+        } else if (command instanceof HelpCommand) {
+            return singletonList(Help.getInstance());
+        } else if (command instanceof QuitCommand) {
+            return handleQuit((QuitCommand) command);
         }
+        throw new IllegalArgumentException(format("Command '%s' is not supported!", command));
     }
 
-    private List<?> handleMove(Command command) {
+    private List<?> handleMove(MoveCommand command) {
         if (state.isInFight()) {
             return singletonList(new Message(
                     "You were fighting, remember? You can't escape, not this time, no!"));
@@ -97,23 +89,9 @@ public class Processor {
         return singletonList(state.getViewPoint());
     }
 
-    public Cell move(Command moveCommand) {
+    public Cell move(MoveCommand moveCommand) {
         ViewPoint viewPoint = state.getViewPoint();
-        Point dest = viewPoint.getLocation();
-        switch (moveCommand) {
-            case MOVE_UP:
-                dest.y--;
-                break;
-            case MOVE_RIGHT:
-                dest.x++;
-                break;
-            case MOVE_DOWN:
-                dest.y++;
-                break;
-            case MOVE_LEFT:
-                dest.x--;
-                break;
-        }
+        Point dest = moveCommand.apply(viewPoint.getLocation());
 
         if (viewPoint.getMap().isAccessible(dest)) {
             viewPoint.setLocation(dest);
@@ -125,7 +103,8 @@ public class Processor {
 
     private List<?> interact(Cell cell) {
         if (cell instanceof Finish) {
-            return handleQuit("This is it! You've made it, my hero! Congrats, boy!");
+            finish();
+            return singletonList(new Message("This is it! You've made it, my hero! Congrats, boy!"));
         }
 
         if (cell instanceof MonsterCell) {
@@ -144,7 +123,7 @@ public class Processor {
     }
 
     @SuppressWarnings("UnusedParameters")
-    private List<?> handleFightInfo(Command command) {
+    private List<?> handleFightInfo(FightCommand command) {
         return state.isInFight()
                ? singletonList(state.getFight())
                : singletonList(new Message("Maaaan... Are you drunk? "
@@ -152,7 +131,7 @@ public class Processor {
     }
 
     @SuppressWarnings("UnusedParameters")
-    private List<?> handlePunch(Command command) {
+    private List<?> handlePunch(PunchCommand command) {
         if (!state.isInFight()) {
             return singletonList(new Message("Okay, you've punched some air in front of right on the face! "
                     + "Or balls! Or whatever... Good job for sure, now what?"));
@@ -191,13 +170,13 @@ public class Processor {
         }
     }
 
-    private List<?> handleLevelUp(Command command) {
+    private List<?> handleLevelUp(LevelUpCommand command) {
         if (!state.isLevelUpPick()) {
             return singletonList(new Message("Haha, nice try! Why don't you fight someone "
                     + "instead of jerking around, hm? Or I'll call for a REAL hero! How are feeling now?!"));
         }
         Hero hero = state.getHero();
-        hero.up(toSkill(command));
+        hero.up(command.getSkill());
         if (hero.getExperience().levelUp()) {
             return singletonList(new Message("And even one more level up! You're now on level " + hero.getLevel()));
         }
@@ -205,7 +184,8 @@ public class Processor {
         return Arrays.asList(new Message("Ok, you're stronger now!"), hero);
     }
 
-    private List<?> handleSave(Command command) {
+    @SuppressWarnings("UnusedParameters")
+    private List<?> handleSave(SaveGameCommand command) {
         File file = new File(FILENAME);
         try {
             if (!file.getParentFile().exists() && !file.getParentFile().mkdirs()) {
@@ -227,7 +207,8 @@ public class Processor {
         }
     }
 
-    private List<?> handleLoad(Command command) {
+    @SuppressWarnings("UnusedParameters")
+    private List<?> handleLoad(LoadGameCommand command) {
         File file = new File(FILENAME);
         try {
             if (!file.exists() || !file.canRead()) {
@@ -247,8 +228,9 @@ public class Processor {
         }
     }
 
-    private List<?> handleQuit(String message) {
+    @SuppressWarnings("UnusedParameters")
+    private List<?> handleQuit(QuitCommand command) {
         finish();
-        return singletonList(new Message(message));
+        return singletonList(new Message("Thank you, my hero, and good bye!"));
     }
 }

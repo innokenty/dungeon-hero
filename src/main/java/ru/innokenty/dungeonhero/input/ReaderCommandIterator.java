@@ -1,8 +1,9 @@
 package ru.innokenty.dungeonhero.input;
 
 import ru.innokenty.dungeonhero.DungeonHeroException;
-import ru.innokenty.dungeonhero.controller.Command;
 import ru.innokenty.dungeonhero.controller.UnsupportedCommandException;
+import ru.innokenty.dungeonhero.controller.command.Command;
+import ru.innokenty.dungeonhero.controller.command.CommandFactory;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -22,7 +23,7 @@ public class ReaderCommandIterator implements CommandIterator {
 
     @Override
     public Command next() throws UnsupportedCommandException {
-        return Command.parse(nextChar());
+        return CommandFactory.parse(nextChar());
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

@@ -1,14 +1,13 @@
 package ru.innokenty.dungeonhero.controller;
 
 import org.junit.Test;
+import ru.innokenty.dungeonhero.controller.command.Command;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import static java.util.stream.Collectors.toSet;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.is;
+import static ru.innokenty.dungeonhero.controller.command.Command.COMMANDS;
 
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
@@ -17,10 +16,9 @@ public class CommandTest {
 
     @Test
     public void testCommandHaveDifferentKeys() {
-        Set<String> keys = new HashSet<>(Command.values().length);
-        Command.forEach(command -> {
-            assertThat(keys, not(hasItem(equalTo(command.key))));
-            keys.add(command.key);
-        });
+        assertThat(
+                COMMANDS.stream().map(Command::getKey).collect(toSet()).size(),
+                is(equalTo(COMMANDS.size()))
+        );
     }
 }

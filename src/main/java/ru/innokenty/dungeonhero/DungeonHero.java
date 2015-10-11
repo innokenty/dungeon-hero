@@ -1,8 +1,8 @@
 package ru.innokenty.dungeonhero;
 
-import ru.innokenty.dungeonhero.controller.Command;
 import ru.innokenty.dungeonhero.controller.Processor;
 import ru.innokenty.dungeonhero.controller.UnsupportedCommandException;
+import ru.innokenty.dungeonhero.controller.command.Command;
 import ru.innokenty.dungeonhero.input.CommandIterator;
 import ru.innokenty.dungeonhero.model.State;
 import ru.innokenty.dungeonhero.view.Output;
