@@ -1,6 +1,6 @@
 package ru.innokenty.dungeonhero.view.console;
 
-import ru.innokenty.dungeonhero.controller.UnsupportedCommandException;
+import ru.innokenty.dungeonhero.controller.command.UnsupportedCommandException;
 import ru.innokenty.dungeonhero.view.Output;
 
 import java.io.PrintStream;

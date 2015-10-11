@@ -1,4 +1,4 @@
-package ru.innokenty.dungeonhero.controller;
+package ru.innokenty.dungeonhero.controller.command;
 
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru

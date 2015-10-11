@@ -1,31 +1,30 @@
 package ru.innokenty.dungeonhero.controller;
 
-import ru.innokenty.dungeonhero.controller.command.Command;
+import ru.innokenty.dungeonhero.controller.command.UnsupportedCommandException;
+import ru.innokenty.dungeonhero.input.CommandIterator;
 import ru.innokenty.dungeonhero.model.State;
-
-import java.util.List;
+import ru.innokenty.dungeonhero.view.Output;
 
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
 public class Processor {
 
-    public static final String FILENAME = "doc/saves/saved_game.dhs";
+    private final CommandIterator commandIterator;
+    private final Output output;
 
     private State state;
 
     private boolean finished;
 
-    public Processor(State state) {
+    public Processor(State state, CommandIterator commandIterator, Output output) {
         this.state = state;
+        this.commandIterator = commandIterator;
+        this.output = output;
     }
 
     public void finish() {
         this.finished = true;
-    }
-
-    public boolean hasFinished() {
-        return finished;
     }
 
     public State getState() {
@@ -36,7 +35,16 @@ public class Processor {
         this.state = state;
     }
 
-    public List<?> handle(Command command) {
-        return command.handle(this);
+    public void start() {
+        while (commandIterator.hasNext()) {
+            try {
+                commandIterator.next().handle(this).stream().forEach(output::output);
+                if (finished) {
+                    break;
+                }
+            } catch (UnsupportedCommandException e) {
+                output.outputException(e);
+            }
+        }
     }
 }

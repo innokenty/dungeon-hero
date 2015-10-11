@@ -1,4 +1,4 @@
-package ru.innokenty.dungeonhero.controller;
+package ru.innokenty.dungeonhero.controller.damage;
 
 import java.io.Serializable;
 import java.util.Random;

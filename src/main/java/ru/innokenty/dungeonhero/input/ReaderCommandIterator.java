@@ -1,9 +1,9 @@
 package ru.innokenty.dungeonhero.input;
 
 import ru.innokenty.dungeonhero.DungeonHeroException;
-import ru.innokenty.dungeonhero.controller.UnsupportedCommandException;
 import ru.innokenty.dungeonhero.controller.command.Command;
 import ru.innokenty.dungeonhero.controller.command.CommandFactory;
+import ru.innokenty.dungeonhero.controller.command.UnsupportedCommandException;
 
 import java.io.IOException;
 import java.io.Reader;

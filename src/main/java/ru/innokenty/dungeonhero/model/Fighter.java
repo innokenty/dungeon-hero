@@ -1,6 +1,6 @@
 package ru.innokenty.dungeonhero.model;
 
-import ru.innokenty.dungeonhero.controller.DamageDistributionModel;
+import ru.innokenty.dungeonhero.controller.damage.DamageDistributionModel;
 
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru

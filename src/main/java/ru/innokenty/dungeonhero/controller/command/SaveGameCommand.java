@@ -24,7 +24,7 @@ public class SaveGameCommand extends Command {
 
     @Override
     public List<?> handle(Processor processor) {
-        File file = new File(Processor.FILENAME);
+        File file = new File("doc/saves/saved_game.dhs");
         try {
             if (!file.getParentFile().exists() && !file.getParentFile().mkdirs()) {
                 throw new DungeonHeroException(format(

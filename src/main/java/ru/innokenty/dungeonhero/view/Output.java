@@ -1,6 +1,6 @@
 package ru.innokenty.dungeonhero.view;
 
-import ru.innokenty.dungeonhero.controller.UnsupportedCommandException;
+import ru.innokenty.dungeonhero.controller.command.UnsupportedCommandException;
 
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru

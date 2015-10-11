@@ -1,7 +1,7 @@
 package ru.innokenty.dungeonhero.model;
 
-import ru.innokenty.dungeonhero.controller.CoNormalDamageDistributionModel;
-import ru.innokenty.dungeonhero.controller.DamageDistributionModel;
+import ru.innokenty.dungeonhero.controller.damage.CoNormalDamageDistributionModel;
+import ru.innokenty.dungeonhero.controller.damage.DamageDistributionModel;
 
 import java.io.Serializable;
 

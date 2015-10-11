@@ -1,5 +1,6 @@
 package ru.innokenty.dungeonhero.controller;
 
+import ru.innokenty.dungeonhero.controller.damage.DamageDistributionModel;
 import ru.innokenty.dungeonhero.model.Experience;
 import ru.innokenty.dungeonhero.model.Fight;
 import ru.innokenty.dungeonhero.model.Fighter;

@@ -1,4 +1,4 @@
-package ru.innokenty.dungeonhero.controller;
+package ru.innokenty.dungeonhero.controller.damage;
 
 import static java.lang.Math.ceil;
 import static java.lang.Math.floor;
