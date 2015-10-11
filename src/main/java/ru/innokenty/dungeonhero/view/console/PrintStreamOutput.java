@@ -21,6 +21,7 @@ public class PrintStreamOutput implements Output {
     @Override
     public void output(Object printable) {
         outStream.println(PrinterFactory.getPrinterFor(printable).print(printable));
+        outStream.print("> ");
     }
 
     @Override
