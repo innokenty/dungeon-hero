@@ -13,7 +13,7 @@ import static java.util.Collections.singletonList;
 public class MapCommand extends Command {
 
     public MapCommand() {
-        super('m', "map", "display the currently visible portion of the map");
+        super("map", "display the currently visible portion of the map");
     }
 
     @Override

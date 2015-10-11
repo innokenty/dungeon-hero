@@ -21,7 +21,7 @@ import static java.util.Collections.singletonList;
 public abstract class MoveCommand extends Command {
 
     public MoveCommand(char key, String name, String description) {
-        super(key, name, description);
+        super(name, description);
     }
 
     protected abstract Point apply(Point point);

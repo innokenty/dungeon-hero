@@ -17,15 +17,15 @@ import static java.lang.String.format;
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
-public class LoadGameCommand extends Command {
+public class LoadGameCommand extends FileCommand {
 
-    public LoadGameCommand() {
-        super('l', "load", "open previously saved game from a file");
+    public LoadGameCommand(String filename) {
+        super('l', "load", "open previously saved game from a file", filename);
     }
 
     @Override
     public List<?> handle(Processor processor) {
-        File file = new File("doc/saves/saved_game.dhs");
+        File file = getFile();
         try {
             if (!file.exists() || !file.canRead()) {
                 throw new DungeonHeroException(format(

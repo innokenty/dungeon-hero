@@ -22,7 +22,7 @@ public abstract class LevelUpCommand extends Command {
     }
 
     public LevelUpCommand(char key, Skill skill, String skillName) {
-        super(key, "+1 " + skillName, "increase " + skillName + " when gaining a new level");
+        super("+1 " + skillName, "increase " + skillName + " when gaining a new level");
         this.skill = skill;
     }
 

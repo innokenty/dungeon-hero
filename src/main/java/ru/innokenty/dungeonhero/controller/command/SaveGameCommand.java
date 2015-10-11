@@ -16,15 +16,15 @@ import static java.util.Collections.singletonList;
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
-public class SaveGameCommand extends Command {
+public class SaveGameCommand extends FileCommand {
 
-    public SaveGameCommand() {
-        super('k', "save", "save the game to a file");
+    public SaveGameCommand(String filename) {
+        super('k', "save", "save the game to a file", filename);
     }
 
     @Override
     public List<?> handle(Processor processor) {
-        File file = new File("doc/saves/saved_game.dhs");
+        File file = getFile();
         try {
             if (!file.getParentFile().exists() && !file.getParentFile().mkdirs()) {
                 throw new DungeonHeroException(format(

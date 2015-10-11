@@ -13,7 +13,7 @@ import static java.util.Collections.singletonList;
 public class FightInfoCommand extends Command {
 
     public FightInfoCommand() {
-        super('f', "fight info", "display the current fight info");
+        super("fight info", "display the current fight info");
     }
 
     @Override

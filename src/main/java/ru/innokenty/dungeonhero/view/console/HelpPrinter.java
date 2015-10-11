@@ -1,8 +1,7 @@
 package ru.innokenty.dungeonhero.view.console;
 
+import ru.innokenty.dungeonhero.controller.command.CommandFactory;
 import ru.innokenty.dungeonhero.view.Help;
-
-import static ru.innokenty.dungeonhero.controller.command.Command.COMMANDS;
 
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
@@ -23,14 +22,27 @@ public class HelpPrinter implements Printer<Help> {
 
     private static String buildHelpMessage() {
         StringBuilder builder = new StringBuilder();
+
         builder.append("To play type in one or multiple command codes and press enter.\n")
                .append("\n")
-               .append("The following commands are available:\n");
-        COMMANDS.stream().forEach(command -> builder
-               .append(command.getKey()).append(", ")
-               .append(command.getName()).append(" - ")
-               .append(command.getDescription())
+               .append("The following one-symbol commands are available:\n");
+
+        CommandFactory.SIMPLE_COMMANDS.entrySet().stream().forEach(entry -> builder
+               .append(entry.getKey()).append(", ")
+               .append(entry.getValue().getName()).append(" - ")
+               .append(entry.getValue().getDescription())
                .append("\n"));
+
+        builder.append("\n")
+               .append("The following commands require an argument that matches the following syntax:\n");
+
+        CommandFactory.COMPLEX_COMMANDS.entrySet().stream().forEach(entry -> builder
+               .append(entry.getKey()).append(", ")
+               // TODO move command description to help class?
+               .append(entry.getValue().apply(null).getName()).append(" - ")
+               .append(entry.getValue().apply(null).getDescription())
+               .append("\n"));
+
         builder.append("\n")
                .append("The map symbols denote the following:\n")
                .append("o        - you\n")
@@ -55,6 +67,7 @@ public class HelpPrinter implements Printer<Help> {
                .append("2) If you engage with a monster of a level less than yours - almost no chance you'll die.\n")
                .append("3) If you die - you are `fucked` and you lose the game.\n")
                .append("4) It's easier to type multiple commands in and then press enter once.\n");
+
         return builder.toString();
     }
 }

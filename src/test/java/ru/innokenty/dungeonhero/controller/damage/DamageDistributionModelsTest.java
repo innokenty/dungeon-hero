@@ -1,13 +1,9 @@
-package ru.innokenty.dungeonhero.controller;
+package ru.innokenty.dungeonhero.controller.damage;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
-import ru.innokenty.dungeonhero.controller.damage.CoNormalDamageDistributionModel;
-import ru.innokenty.dungeonhero.controller.damage.DamageDistributionModel;
-import ru.innokenty.dungeonhero.controller.damage.NormalDamageDistributionModel;
-import ru.innokenty.dungeonhero.controller.damage.UniformDamageDistributionModel;
 
 import java.util.Arrays;
 import java.util.Collection;

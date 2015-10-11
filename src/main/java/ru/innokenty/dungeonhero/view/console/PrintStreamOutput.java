@@ -1,6 +1,6 @@
 package ru.innokenty.dungeonhero.view.console;
 
-import ru.innokenty.dungeonhero.controller.command.UnsupportedCommandException;
+import ru.innokenty.dungeonhero.DungeonHeroException;
 import ru.innokenty.dungeonhero.view.Output;
 
 import java.io.PrintStream;
@@ -24,7 +24,11 @@ public class PrintStreamOutput implements Output {
     }
 
     @Override
-    public void outputException(UnsupportedCommandException e) {
-        errStream.println("Command '" + e.getCommand() + "' not supported!");
+    public void outputException(DungeonHeroException e) {
+        if (e.getCause() == null) {
+            errStream.println(e.getMessage());
+        } else {
+            e.printStackTrace(errStream);
+        }
     }
 }

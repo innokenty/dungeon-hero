@@ -3,17 +3,22 @@ package ru.innokenty.dungeonhero.input;
 import ru.innokenty.dungeonhero.DungeonHeroException;
 import ru.innokenty.dungeonhero.controller.command.Command;
 import ru.innokenty.dungeonhero.controller.command.CommandFactory;
-import ru.innokenty.dungeonhero.controller.command.UnsupportedCommandException;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
 
-public class ReaderCommandIterator implements CommandIterator {
+public class ReaderCommandIterator implements Iterator<Command> {
 
-    private final Reader reader;
+    private final BufferedReader reader;
+
+    private final Queue<Command> commands = new LinkedList<>();
 
     public ReaderCommandIterator(Reader reader) {
-        this.reader = reader;
+        this.reader = new BufferedReader(reader);
     }
 
     @Override
@@ -22,15 +27,18 @@ public class ReaderCommandIterator implements CommandIterator {
     }
 
     @Override
-    public Command next() throws UnsupportedCommandException {
-        return CommandFactory.parse(nextChar());
+    public Command next() {
+        if (commands.isEmpty()) {
+            commands.addAll(CommandFactory.parse(nextLine()));
+        }
+        return commands.poll();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
-    public String nextChar() {
+    public String nextLine() {
         String next;
         try {
-            while ((next = String.valueOf((char) reader.read()).trim()).isEmpty());
+            while ((next = reader.readLine().trim()).isEmpty());
         } catch (IOException e) {
             throw new DungeonHeroException("Unable to read input, closing", e);
         }

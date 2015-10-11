@@ -13,7 +13,7 @@ import static java.util.Collections.singletonList;
 public class HelpCommand extends Command {
 
     public HelpCommand() {
-        super('h', "help", "display this help");
+        super("help", "display this help");
     }
 
     @Override

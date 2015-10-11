@@ -13,7 +13,7 @@ import static java.util.Collections.singletonList;
 public class InfoCommand extends Command {
 
     public InfoCommand() {
-        super('i', "info", "display character stats and info");
+        super("info", "display character stats and info");
     }
 
     public List<Hero> handle(Processor processor) {

@@ -19,7 +19,7 @@ import static java.util.Collections.singletonList;
 public class PunchCommand extends Command {
 
     public PunchCommand() {
-        super('p', "punch", "hit the monster while fighting");
+        super("punch", "hit the monster while fighting");
     }
 
     @Override

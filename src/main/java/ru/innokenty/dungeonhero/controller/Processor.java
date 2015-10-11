@@ -1,7 +1,7 @@
 package ru.innokenty.dungeonhero.controller;
 
-import ru.innokenty.dungeonhero.controller.command.UnsupportedCommandException;
-import ru.innokenty.dungeonhero.input.CommandIterator;
+import ru.innokenty.dungeonhero.DungeonHeroException;
+import ru.innokenty.dungeonhero.input.ReaderCommandIterator;
 import ru.innokenty.dungeonhero.model.State;
 import ru.innokenty.dungeonhero.view.Output;
 
@@ -10,14 +10,14 @@ import ru.innokenty.dungeonhero.view.Output;
  */
 public class Processor {
 
-    private final CommandIterator commandIterator;
+    private final ReaderCommandIterator commandIterator;
     private final Output output;
 
     private State state;
 
     private boolean finished;
 
-    public Processor(State state, CommandIterator commandIterator, Output output) {
+    public Processor(State state, ReaderCommandIterator commandIterator, Output output) {
         this.state = state;
         this.commandIterator = commandIterator;
         this.output = output;
@@ -42,7 +42,7 @@ public class Processor {
                 if (finished) {
                     break;
                 }
-            } catch (UnsupportedCommandException e) {
+            } catch (DungeonHeroException e) {
                 output.outputException(e);
             }
         }

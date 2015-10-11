@@ -13,7 +13,7 @@ import static java.util.Collections.singletonList;
 public class QuitCommand extends Command {
 
     public QuitCommand() {
-        super('q', "quit", "quit the game without saving");
+        super("quit", "quit the game without saving");
     }
 
     @Override
