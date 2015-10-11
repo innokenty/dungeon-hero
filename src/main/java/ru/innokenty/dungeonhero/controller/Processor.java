@@ -23,6 +23,7 @@ public class Processor {
         this.output = output;
     }
 
+    //TODO exit the app on quit command only
     public void finish() {
         this.finished = true;
     }
