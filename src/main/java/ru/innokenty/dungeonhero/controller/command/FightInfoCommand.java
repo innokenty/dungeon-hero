@@ -10,9 +10,9 @@ import static java.util.Collections.singletonList;
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
-public class FightCommand extends Command {
+public class FightInfoCommand extends Command {
 
-    public FightCommand() {
+    public FightInfoCommand() {
         super('f', "fight info", "display the current fight info");
     }
 

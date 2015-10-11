@@ -11,7 +11,7 @@ import java.util.List;
 public abstract class Command {
 
     public static final List<Command> COMMANDS = Arrays.asList(
-            new FightCommand(),
+            new FightInfoCommand(),
             new HelpCommand(),
             new IncreaseAgilityCommand(),
             new IncreaseHealthCommand(),
