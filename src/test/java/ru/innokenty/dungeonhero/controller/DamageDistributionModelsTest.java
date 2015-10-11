@@ -53,6 +53,7 @@ public class DamageDistributionModelsTest {
             values.compute(dmg, (dmg1, count) -> count == null ? 1 : count + 1);
         }
 
+        System.out.println();
         for (Map.Entry<Integer, Integer> entry : values.entrySet()) {
             System.out.println(entry.getKey() + (entry.getKey() < 10 ? " " : "") + " => " + entry.getValue());
         }

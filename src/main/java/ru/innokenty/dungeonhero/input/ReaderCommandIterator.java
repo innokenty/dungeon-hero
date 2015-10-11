@@ -22,11 +22,11 @@ public class ReaderCommandIterator implements CommandIterator {
 
     @Override
     public Command next() throws UnsupportedCommandException {
-        return Command.parse(nextLine());
+        return Command.parse(nextChar());
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
-    public String nextLine() {
+    public String nextChar() {
         String next;
         try {
             while ((next = String.valueOf((char) reader.read()).trim()).isEmpty());

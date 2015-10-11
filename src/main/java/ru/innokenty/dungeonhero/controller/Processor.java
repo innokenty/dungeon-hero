@@ -62,7 +62,7 @@ public class Processor {
             case INFO:
                 return singletonList(state.getHero());
             case FIGHT:
-                return handleFightInfo();
+                return handleFightInfo(command);
             case PUNCH:
                 return handlePunch(command);
             case STRENGTH:
@@ -71,9 +71,9 @@ public class Processor {
             case VISION:
                 return handleLevelUp(command);
             case SAVE:
-                return handleSave();
+                return handleSave(command);
             case LOAD:
-                return handleLoad();
+                return handleLoad(command);
             case HELP:
                 return singletonList(Help.getInstance());
             case QUIT:
@@ -143,13 +143,15 @@ public class Processor {
         ));
     }
 
-    private List<?> handleFightInfo() {
+    @SuppressWarnings("UnusedParameters")
+    private List<?> handleFightInfo(Command command) {
         return state.isInFight()
                ? singletonList(state.getFight())
                : singletonList(new Message("Maaaan... Are you drunk? "
                        + "Whom are you fighting do you think? I'm your friend, chill out!"));
     }
 
+    @SuppressWarnings("UnusedParameters")
     private List<?> handlePunch(Command command) {
         if (!state.isInFight()) {
             return singletonList(new Message("Okay, you've punched some air in front of right on the face! "
@@ -203,7 +205,7 @@ public class Processor {
         return Arrays.asList(new Message("Ok, you're stronger now!"), hero);
     }
 
-    private List<?> handleSave() {
+    private List<?> handleSave(Command command) {
         File file = new File(FILENAME);
         try {
             if (!file.getParentFile().exists() && !file.getParentFile().mkdirs()) {
@@ -225,7 +227,7 @@ public class Processor {
         }
     }
 
-    private List<?> handleLoad() {
+    private List<?> handleLoad(Command command) {
         File file = new File(FILENAME);
         try {
             if (!file.exists() || !file.canRead()) {
