@@ -1,5 +1,7 @@
 package ru.innokenty.dungeonhero.controller.command;
 
+import ru.innokenty.dungeonhero.controller.Processor;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -48,4 +50,6 @@ public abstract class Command {
     public String getDescription() {
         return description;
     }
+
+    public abstract List<?> handle(Processor processor);
 }
