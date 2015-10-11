@@ -1,6 +1,5 @@
 package ru.innokenty.dungeonhero.model;
 
-import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -27,7 +26,7 @@ public class Hero implements WithVision, Fighter {
     private int health;
 
     {
-        Arrays.asList(Skill.values()).stream().forEach(s -> skills.put(s, 1));
+        Skill.forEach(s -> skills.put(s, 1));
         skills.put(VISION, 5);
     }
 
@@ -79,6 +78,7 @@ public class Hero implements WithVision, Fighter {
 
     @Override
     public int getMinDamage() {
+        //TODO make agility better increase min damage (now level 2 -> 1 - 5)
         //complex formula that came from my mind and describes how I feel it should work
         return (int) round(sqrt(get(STRENGTH) * (1 + pow(max(0, get(AGILITY) - 1), 3))));
     }
