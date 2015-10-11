@@ -1,7 +1,7 @@
 package ru.innokenty.dungeonhero.model;
 
+import ru.innokenty.dungeonhero.controller.CoNormalDamageDistributionModel;
 import ru.innokenty.dungeonhero.controller.DamageDistributionModel;
-import ru.innokenty.dungeonhero.controller.UniformDamageDistributionModel;
 
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
@@ -19,7 +19,7 @@ public class State {
     public State(WorldMap map) {
         hero = new Hero();
         viewPoint = new ViewPoint(map, hero);
-        damageModel = new UniformDamageDistributionModel();
+        damageModel = new CoNormalDamageDistributionModel();
     }
 
     public Hero getHero() {
