@@ -1,7 +1,7 @@
 package ru.innokenty.dungeonhero.controller.command;
 
 import ru.innokenty.dungeonhero.controller.Processor;
-import ru.innokenty.dungeonhero.model.ViewPoint;
+import ru.innokenty.dungeonhero.view.Message;
 
 import java.util.List;
 
@@ -17,7 +17,10 @@ public class MapCommand extends Command {
     }
 
     @Override
-    public List<ViewPoint> handle(Processor processor) {
-        return singletonList(processor.getState().getViewPoint());
+    public List<?> handle(Processor processor) {
+        return singletonList(processor.getState().isMapLoaded()
+                ? processor.getState().getViewPoint()
+                : new Message("You have to load the map first! Load a map!")
+        );
     }
 }

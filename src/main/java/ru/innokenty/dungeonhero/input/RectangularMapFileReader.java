@@ -7,6 +7,7 @@ import ru.innokenty.dungeonhero.model.WorldMap;
 
 import java.awt.Point;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +19,11 @@ import static ru.innokenty.dungeonhero.model.Cell.START;
  */
 public class RectangularMapFileReader {
 
-    private final String file;
+    private final File file;
 
     private RectangularMap map;
 
-    public RectangularMapFileReader(String file) {
+    public RectangularMapFileReader(File file) {
         this.file = file;
     }
 
@@ -66,7 +67,8 @@ public class RectangularMapFileReader {
                 mapData.add(line);
             }
         } catch (Exception e) {
-            throw new DungeonHeroException("Unable to load map from file '" + file + "'", e);
+            throw new DungeonHeroException(String.format(
+                    "Unable to load map from file '%s'", file.getAbsolutePath()), e);
         }
         return mapData;
     }

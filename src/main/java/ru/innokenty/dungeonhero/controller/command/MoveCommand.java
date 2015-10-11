@@ -29,21 +29,30 @@ public abstract class MoveCommand extends Command {
     @Override
     public List<?> handle(Processor processor) {
         State state = processor.getState();
+
         if (state.isInFight()) {
             return singletonList(new Message(
-                    "You were fighting, remember? You can't escape, not this time, no!"));}
+                    "You were fighting, remember? You can't escape, not this time, no!"));
+        }
+
+        if (!state.isMapLoaded()) {
+            return singletonList(new Message(
+                    "You can't move, you have to load the map first! Load a map!"));
+        }
+
         Cell cell = move(state);
         if (cell == null) {
             return singletonList(new Message("Unable to move there, don't you see?!"));
         } else if (cell.isInteractable()) {
             return interact(cell, state, processor);
         }
+
         return singletonList(state.getViewPoint());
     }
 
     private Cell move(State state) {
         ViewPoint viewPoint = state.getViewPoint();
-        Point dest = this.apply(viewPoint.getLocation());
+        Point dest = apply(viewPoint.getLocation());
 
         if (viewPoint.getMap().isAccessible(dest)) {
             viewPoint.setLocation(dest);

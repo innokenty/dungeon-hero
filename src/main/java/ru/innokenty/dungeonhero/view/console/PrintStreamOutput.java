@@ -28,6 +28,7 @@ public class PrintStreamOutput implements Output {
         if (e.getCause() == null) {
             errStream.println(e.getMessage());
         } else {
+            errStream.println("Ooops, something happened!");
             e.printStackTrace(errStream);
         }
     }

@@ -9,10 +9,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.Arrays;
 import java.util.List;
 
 import static java.lang.String.format;
+import static java.util.Collections.singletonList;
 
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
@@ -20,23 +20,19 @@ import static java.lang.String.format;
 public class LoadGameCommand extends FileCommand {
 
     public LoadGameCommand(String filename) {
-        super('l', "load", "open previously saved game from a file", filename);
+        super("load game", "open previously saved game from a file", filename);
     }
 
     @Override
     public List<?> handle(Processor processor) {
         File file = getFile();
         try {
-            if (!file.exists() || !file.canRead()) {
-                throw new DungeonHeroException(format(
-                        "Unable read the file at %s! Does it exist?", file.getAbsolutePath()));
-            }
+            assertCanReadFile(file);
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
                 processor.setState((State) ois.readObject());
             }
-            return Arrays.asList(
-                    new Message(format("Successfully loaded the saved game from %s!", file.getAbsolutePath())),
-                    processor.getState().getViewPoint());
+            return singletonList(new Message(format(
+                    "Successfully loaded the saved game from %s!", file.getAbsolutePath())));
         } catch (ClassNotFoundException e) {
             throw new DungeonHeroException("Unable read the save file " + file.getAbsolutePath(), e);
         } catch (IOException e) {

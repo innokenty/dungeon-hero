@@ -17,8 +17,8 @@ public class Processor {
 
     private boolean finished;
 
-    public Processor(State state, ReaderCommandIterator commandIterator, Output output) {
-        this.state = state;
+    public Processor(String playerName, ReaderCommandIterator commandIterator, Output output) {
+        this.state = new State(playerName);
         this.commandIterator = commandIterator;
         this.output = output;
     }

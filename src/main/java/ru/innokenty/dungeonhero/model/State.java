@@ -11,16 +11,15 @@ import java.io.Serializable;
 public class State implements Serializable {
 
     private final Hero hero;
-    private final ViewPoint viewPoint;
     private final DamageDistributionModel damageModel;
 
+    private ViewPoint viewPoint;
     private Fight fight;
 
     private boolean levelUp;
 
-    public State(WorldMap map, String playerName) {
+    public State(String playerName) {
         hero = new Hero(playerName);
-        viewPoint = new ViewPoint(map, hero);
         damageModel = new CoNormalDamageDistributionModel();
     }
 
@@ -28,12 +27,20 @@ public class State implements Serializable {
         return hero;
     }
 
+    public DamageDistributionModel getDamageModel() {
+        return damageModel;
+    }
+
     public ViewPoint getViewPoint() {
         return viewPoint;
     }
 
-    public DamageDistributionModel getDamageModel() {
-        return damageModel;
+    public boolean isMapLoaded() {
+        return getViewPoint() != null;
+    }
+
+    public void setMap(WorldMap map) {
+        viewPoint = new ViewPoint(map, hero);
     }
 
     public Fight getFight() {

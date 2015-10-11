@@ -38,8 +38,9 @@ public class CommandFactory {
         SIMPLE_COMMANDS.put('v', new IncreaseVisionCommand());
         SIMPLE_COMMANDS.put('q', new QuitCommand());
 
-        COMPLEX_COMMANDS.put("k (.+)", SaveGameCommand::new);
-        COMPLEX_COMMANDS.put("l (.+)", LoadGameCommand::new);
+        COMPLEX_COMMANDS.put("lm (.+)", LoadMapCommand::new);
+        COMPLEX_COMMANDS.put("gl (.+)", LoadGameCommand::new);
+        COMPLEX_COMMANDS.put("gs (.+)", SaveGameCommand::new);
     }
 
     public static List<Command> parse(String commandString) {

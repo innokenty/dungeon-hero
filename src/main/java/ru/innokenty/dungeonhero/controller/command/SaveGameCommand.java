@@ -19,18 +19,18 @@ import static java.util.Collections.singletonList;
 public class SaveGameCommand extends FileCommand {
 
     public SaveGameCommand(String filename) {
-        super('k', "save", "save the game to a file", filename);
+        super("save game", "save the game to a file", filename);
     }
 
     @Override
     public List<?> handle(Processor processor) {
         File file = getFile();
         try {
-            if (!file.getParentFile().exists() && !file.getParentFile().mkdirs()) {
+            if (!file.exists() && !file.createNewFile()) {
                 throw new DungeonHeroException(format(
-                        "Unable to create directory at %s!", file.getParentFile().getAbsolutePath()));
+                        "Unable to create file at %s!", file.getParentFile().getAbsolutePath()));
             }
-            if (file.exists() && !file.canWrite()) {
+            if (!file.canWrite()) {
                 throw new DungeonHeroException(format(
                         "Unable to write to the file at %s!", file.getAbsolutePath()));
             }
