@@ -19,7 +19,7 @@ public class HeroTest {
 
     @Before
     public void setUp() throws Exception {
-        hero = new Hero();
+        hero = new Hero("hero");
     }
 
     @Test

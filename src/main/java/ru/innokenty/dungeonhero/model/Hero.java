@@ -22,11 +22,17 @@ public class Hero implements WithVision, Fighter {
 
     private final Experience experience = new Experience();
 
+    private final String name;
+
     private int health;
 
     {
         Arrays.asList(Skill.values()).stream().forEach(s -> skills.put(s, 1));
         skills.put(VISION, 5);
+    }
+
+    public Hero(String playerName) {
+        name = playerName;
     }
 
     public void up(Skill skill) {
@@ -55,10 +61,9 @@ public class Hero implements WithVision, Fighter {
         return getExperience().getLevel();
     }
 
-    //TODO ask for real name
     @Override
     public String getName() {
-        return "Player";
+        return name;
     }
 
     @Override

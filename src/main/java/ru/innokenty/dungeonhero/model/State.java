@@ -16,8 +16,8 @@ public class State {
 
     private boolean levelUp;
 
-    public State(WorldMap map) {
-        hero = new Hero();
+    public State(WorldMap map, String playerName) {
+        hero = new Hero(playerName);
         viewPoint = new ViewPoint(map, hero);
         damageModel = new CoNormalDamageDistributionModel();
     }

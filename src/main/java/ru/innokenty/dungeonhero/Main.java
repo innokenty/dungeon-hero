@@ -14,7 +14,9 @@ public class Main {
 
     public static void main(String[] args) {
         new DungeonHero(
-                new State(new RectangularMapFileReader(args[0]).getMap()),
+                new State(
+                        new RectangularMapFileReader(args[0]).getMap(),
+                        args.length > 1 ? args[1] : "Player"),
                 new ReaderCommandIterator(new InputStreamReader(System.in)),
                 new ConsoleOutput()
         ).start();

@@ -19,7 +19,8 @@ public class HeroPrinter implements Printer<Hero> {
 
         StringBuilder builder = new StringBuilder();
 
-        builder.append("===== LEVEL ================\n")
+        builder.append(hero.getName()).append("\n")
+               .append("===== LEVEL ================\n")
                .append(exp.getLevel()).append("\n")
                .append("===== SKILLS ===============\n");
         Skill.forEach(skill -> builder
