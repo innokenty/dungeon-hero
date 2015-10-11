@@ -57,13 +57,13 @@ public class Hero implements Serializable, WithVision, Fighter {
     }
 
     @Override
-    public int getLevel() {
-        return getExperience().getLevel();
+    public String getName() {
+        return name;
     }
 
     @Override
-    public String getName() {
-        return name;
+    public int getLevel() {
+        return getExperience().getLevel();
     }
 
     @Override

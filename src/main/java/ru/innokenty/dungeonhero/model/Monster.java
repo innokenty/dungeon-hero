@@ -46,17 +46,17 @@ public class Monster implements Serializable, Fighter {
         this.healthTotal = level * 10 + random.nextInt((int) pow(level, 2));
         this.health = healthTotal;
         this.minHitDamage = level;
-        this.maxHitDamage = minHitDamage + 1 + random.nextInt((int) pow(level, 3/2));
-    }
-
-    @Override
-    public int getLevel() {
-        return level;
+        this.maxHitDamage = minHitDamage + 1 + random.nextInt((int) pow(level, 2));
     }
 
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public int getLevel() {
+        return level;
     }
 
     @Override

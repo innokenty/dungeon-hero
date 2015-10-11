@@ -7,8 +7,8 @@ import ru.innokenty.dungeonhero.controller.damage.DamageDistributionModel;
  */
 public interface Fighter {
 
-    int getLevel();
     String getName();
+    int getLevel();
     int getHealth();
     int getHealthTotal();
     int getMinDamage();
