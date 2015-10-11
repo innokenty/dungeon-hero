@@ -1,10 +1,12 @@
 package ru.innokenty.dungeonhero.model;
 
 
+import java.io.Serializable;
+
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
-public class Experience {
+public class Experience implements Serializable {
 
     public static final int SCALE_FACTOR = 1000;
 

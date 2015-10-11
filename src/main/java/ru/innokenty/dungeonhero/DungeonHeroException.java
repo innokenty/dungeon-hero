@@ -5,6 +5,10 @@ package ru.innokenty.dungeonhero;
  */
 public class DungeonHeroException extends RuntimeException {
 
+    public DungeonHeroException(String message) {
+        super(message);
+    }
+
     public DungeonHeroException(String message, Throwable cause) {
         super(message, cause);
     }

@@ -1,5 +1,6 @@
 package ru.innokenty.dungeonhero.model;
 
+import java.io.Serializable;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -15,7 +16,7 @@ import static ru.innokenty.dungeonhero.model.Skill.VISION;
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
-public class Hero implements WithVision, Fighter {
+public class Hero implements Serializable, WithVision, Fighter {
 
     private final Map<Skill, Integer> skills = new EnumMap<>(Skill.class);
 

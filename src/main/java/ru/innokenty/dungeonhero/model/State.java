@@ -3,10 +3,12 @@ package ru.innokenty.dungeonhero.model;
 import ru.innokenty.dungeonhero.controller.CoNormalDamageDistributionModel;
 import ru.innokenty.dungeonhero.controller.DamageDistributionModel;
 
+import java.io.Serializable;
+
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
-public class State {
+public class State implements Serializable {
 
     private final Hero hero;
     private final ViewPoint viewPoint;

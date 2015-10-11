@@ -8,7 +8,6 @@ import ru.innokenty.dungeonhero.model.WallCell;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static ru.innokenty.dungeonhero.model.Cell.*;
 import static ru.innokenty.dungeonhero.view.console.CellPrinter.print;
 
 /**
@@ -18,11 +17,11 @@ public class CellPrinterTest {
 
     @Test
     public void testPrint() throws Exception {
-        assertThat(print(EMPTY), is(equalTo(' ')));
-        assertThat(print(START), is(equalTo(' ')));
-        assertThat(print(DARK), is(equalTo('.')));
-        assertThat(print(FINISH), is(equalTo('@')));
-        assertThat(print(HERO), is(equalTo('o')));
+        assertThat(print(new Cell.Empty()), is(equalTo(' ')));
+        assertThat(print(new Cell.Start()), is(equalTo(' ')));
+        assertThat(print(new Cell.Dark()), is(equalTo('.')));
+        assertThat(print(new Cell.Finish()), is(equalTo('@')));
+        assertThat(print(new Cell.Hero()), is(equalTo('o')));
 
         assertThat(print(new WallCell('+')), is(equalTo('+')));
         assertThat(print(new WallCell('-')), is(equalTo('-')));

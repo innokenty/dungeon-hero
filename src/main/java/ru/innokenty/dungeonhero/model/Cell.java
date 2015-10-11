@@ -1,15 +1,17 @@
 package ru.innokenty.dungeonhero.model;
 
+import java.io.Serializable;
+
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
-public class Cell {
+public class Cell implements Serializable {
 
-    public static final Cell EMPTY = new Cell();
-    public static final Cell DARK = new Cell();
-    public static final Cell START = new Cell();
-    public static final Cell HERO = new Cell();
-    public static final Cell FINISH = new Cell(true);
+    public static final Cell EMPTY  = new Empty();
+    public static final Cell DARK   = new Dark();
+    public static final Cell START  = new Start();
+    public static final Cell HERO   = new Hero();
+    public static final Cell FINISH = new Finish();
 
     private final boolean interactable;
 
@@ -17,10 +19,9 @@ public class Cell {
         this(false);
     }
 
-    public Cell(boolean interactable) {
+    protected Cell(boolean interactable) {
         this.interactable = interactable;
     }
-
 
     public boolean isAccessible() {
         return true;
@@ -28,5 +29,15 @@ public class Cell {
 
     public boolean isInteractable() {
         return interactable;
+    }
+
+    public static class Empty extends Cell {}
+    public static class Dark extends Cell {}
+    public static class Start extends Cell {}
+    public static class Hero extends Cell {}
+    public static class Finish extends Cell {
+        public Finish() {
+            super(true);
+        }
     }
 }

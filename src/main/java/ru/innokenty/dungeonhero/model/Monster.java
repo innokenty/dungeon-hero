@@ -1,5 +1,6 @@
 package ru.innokenty.dungeonhero.model;
 
+import java.io.Serializable;
 import java.util.Random;
 
 import static java.lang.Math.max;
@@ -8,7 +9,7 @@ import static java.lang.Math.pow;
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
-public class Monster implements Fighter {
+public class Monster implements Serializable, Fighter {
 
     private static final String[] NAMES = new String[]{
             "Evil Pig",
@@ -45,7 +46,7 @@ public class Monster implements Fighter {
         this.healthTotal = level * 10 + random.nextInt((int) pow(level, 2));
         this.health = healthTotal;
         this.minHitDamage = level;
-        this.maxHitDamage = minHitDamage + random.nextInt((int) pow(level, 2));
+        this.maxHitDamage = minHitDamage + 1 + random.nextInt((int) pow(level, 3/2));
     }
 
     @Override

@@ -1,6 +1,7 @@
 package ru.innokenty.dungeonhero.model;
 
 import java.awt.Point;
+import java.io.Serializable;
 
 import static java.lang.Math.max;
 import static java.lang.Math.min;
@@ -12,7 +13,7 @@ import static ru.innokenty.dungeonhero.model.Cell.HERO;
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
-public class ViewPoint {
+public class ViewPoint implements Serializable {
 
     private final WorldMap map;
     private final WithVision withVision;

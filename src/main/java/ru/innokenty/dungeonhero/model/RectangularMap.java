@@ -1,12 +1,13 @@
 package ru.innokenty.dungeonhero.model;
 
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.Arrays;
 
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
-public class RectangularMap implements WorldMap {
+public class RectangularMap implements Serializable, WorldMap {
 
     private final Cell[][] cells;
 

@@ -1,11 +1,12 @@
 package ru.innokenty.dungeonhero.controller;
 
+import java.io.Serializable;
 import java.util.Random;
 
 /**
  * @author Innokenty Shuvalov innokenty@yandex-team.ru
  */
-public class NormalDamageDistributionModel implements DamageDistributionModel {
+public class NormalDamageDistributionModel implements Serializable, DamageDistributionModel {
 
     private static final Random RND = new Random();
 
