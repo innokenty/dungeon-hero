@@ -10,8 +10,10 @@ import java.io.Serializable;
  */
 public class State implements Serializable {
 
-    private final Hero hero;
+    private Hero hero;
     private final DamageDistributionModel damageModel;
+
+    private final String playerName;
 
     private ViewPoint viewPoint;
     private Fight fight;
@@ -19,8 +21,13 @@ public class State implements Serializable {
     private boolean levelUp;
 
     public State(String playerName) {
-        hero = new Hero(playerName);
-        damageModel = new CoNormalDamageDistributionModel();
+        this.playerName = playerName;
+        this.damageModel = new CoNormalDamageDistributionModel();
+        resetHero(); //TODO init hero only when a map is loaded
+    }
+
+    public void resetHero() {
+        hero = new Hero(this.playerName);
     }
 
     public Hero getHero() {

@@ -23,6 +23,7 @@ public class LoadMapCommand extends FileCommand {
     public List<?> handle(Processor processor) {
         File file = getFile();
         assertCanReadFile(file);
+        processor.getState().resetHero();
         processor.getState().setMap(new RectangularMapFileReader(file).getMap());
         return Arrays.asList(
                 new Message(format("Successfully loaded the map from %s!", file.getAbsolutePath())),
