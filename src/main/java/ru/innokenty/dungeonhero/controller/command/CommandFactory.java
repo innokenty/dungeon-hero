@@ -4,6 +4,7 @@ import ru.innokenty.dungeonhero.DungeonHeroException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.function.Function;
 import java.util.regex.Matcher;
@@ -17,7 +18,7 @@ import static java.util.regex.Pattern.compile;
 public class CommandFactory {
 
     /** char -> command */
-    public static final HashMap<Character, Command> SIMPLE_COMMANDS = new HashMap<>();
+    public static final HashMap<Character, Command> SIMPLE_COMMANDS = new LinkedHashMap<>();
 
     /** regex -> command builder */
     public static final HashMap<String, Function<String, Command>> COMPLEX_COMMANDS = new HashMap<>();
