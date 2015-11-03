@@ -12,7 +12,7 @@ To launch the game you'll need:
 If you're okay with that then do the following to play the game:
 
 1. Checkout the repo
-1. Run ```mvn clean package -DskipTests=true```
+1. Run ```mvn clean package```
 1. Run ```java -jar target/dungeon-hero.jar 'Your name here'```
 1. Follow the onscreen instructions
 1. Have fun
