@@ -22,20 +22,6 @@ Good luck with not dying!!
 ## P.S. Spoiler
 It looks like that:
 
-* Show the map:
-```
-> m
-.........
-.+-----..
-.|o     .
-.|     ..
-.+---+ ..
-.|...| ..
-.+---+...
-.. ......
-.........
-```
-
 * Show you charachter info
 ```
 > i
@@ -53,6 +39,20 @@ next level => 0/2000
 ===== CALCULATED STATS =====
 HP => 22
 damage => 1-3
+```
+
+* Show the map:
+```
+> m
+.........
+.+-----..
+.|o     .
+.|     ..
+.+---+ ..
+.|...| ..
+.+---+...
+.. ......
+.........
 ```
 
 * Go to the right:
