@@ -9,7 +9,7 @@ To launch the game you'll need:
 * Java 8
 * Maven
 
-If you're okay with that then do the following to play the game:
+If you're okay with that, then do the following to play the game:
 
 1. Checkout the repo
 1. Run ```mvn clean package```
@@ -22,7 +22,7 @@ Good luck with not dying!!
 ## P.S. Spoiler
 It looks like that:
 
-* Show you charachter info
+* Show your charachter info
 ```
 > i
 Innokenty
@@ -103,4 +103,4 @@ The creature doesn't stand still though and hits you back dealing 2 damage!
 Oh yeah, you've done it, you slaved the beast! You gain 1177 experience.
 ```
 
-Unfortunately 1177 exp is not enoght for the level two, so... you'll need more monsters! Good luck, my hero!
+Unfortunately 1177 exp is not enogh for the level two, so... you'll need more monsters! Good luck, my hero!
