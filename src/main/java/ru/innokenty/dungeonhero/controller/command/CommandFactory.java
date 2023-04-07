@@ -33,9 +33,9 @@ public class CommandFactory {
         SIMPLE_COMMANDS.put('w', new MoveUpCommand());
         SIMPLE_COMMANDS.put('f', new FightInfoCommand());
         SIMPLE_COMMANDS.put('p', new PunchCommand());
+        SIMPLE_COMMANDS.put('z', new IncreaseStrengthCommand());
         SIMPLE_COMMANDS.put('x', new IncreaseAgilityCommand());
         SIMPLE_COMMANDS.put('c', new IncreaseHealthCommand());
-        SIMPLE_COMMANDS.put('z', new IncreaseStrengthCommand());
         SIMPLE_COMMANDS.put('v', new IncreaseVisionCommand());
         SIMPLE_COMMANDS.put('q', new QuitCommand());
 
